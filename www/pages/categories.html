@@ -1,0 +1,53 @@
+<!-- Header -->
+<div ng-include="'components/header.html'"></div>
+
+<!-- Conteúdo Principal -->
+<div class="container-fluid categories-container">
+  <!-- Botão Adicionar Categoria -->
+  <button class="btn btn-add-category" data-bs-toggle="modal" data-bs-target="#meuModal">
+    <i class="bi bi-plus-lg btn-icon"></i>
+    <span class="btn-text">Nova Categoria</span>
+  </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="meuModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Cabeçalho -->
+      <div class="modal-header">
+        <h5 class="modal-title">Nova Categoria</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      
+      <!-- Corpo -->
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="categoriaNome" class="form-label">Título da Categoria</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="categoriaNome" 
+            placeholder="Digite o nome da categoria (máx. 100 caracteres)"
+            maxlength="100"
+            ng-model="novaCategoria.nome"
+            ng-keyup="atualizarContador()"
+          >
+          <small class="text-muted float-end">
+            <span id="contadorCaracteres">100</span>/100 caracteres restantes
+          </small>
+        </div>
+      </div>
+      
+      <!-- Rodapé -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Fechar
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="salvarCategoria()" ng-disabled="!novaCategoria.nome || novaCategoria.nome.length === 0">
+          Salvar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+/* Container & Main Button */
+.categories-container {
+  background-color: #fff5f7;
+  min-height: 100vh;
+  padding: 20px 20px 100px;
+  position: relative;
+}
+
+.btn-add-category {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  height: 60px;
+  padding: 0 25px;
+  border-radius: 30px;
+  background-color: #ff85a2;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.btn-add-category:hover {
+  background-color: #e6738f;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal Styles */
+.modal-header {
+  background-color: #ff85a2;
+  color: white;
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: #ff85a2;
+  border: 1px solid #ff85a2;
+  color: white;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover { background-color: #e6738f; }
+.btn-primary:active { 
+  background-color: white !important; 
+  color: #ff85a2 !important;
+}
+
+.btn-outline-secondary {
+  background-color: white;
+  border: 1px solid #ff85a2;
+  color: #ff85a2;
+  transition: all 0.2s;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #ff85a2;
+  color: white;
+}
+
+.btn-outline-secondary:active {
+  background-color: #ff85a2 !important;
+  color: white !important;
+}
+
+/* Form Styles */
+.form-control:focus {
+  border-color: #ff85a2;
+  box-shadow: 0 0 0 0.25rem rgba(255, 133, 162, 0.25);
+}
+
+.text-muted span {
+  font-weight: bold;
+  color: #ff85a2;
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+}
