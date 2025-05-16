@@ -22,4 +22,40 @@ app.controller('categoriesController', function($scope) {
       $scope.contador = 100; // Reseta o contador
     }
   };
+
+
+ 
+$scope.categories = [];
+
+$scope.novaCategoria = {
+  nome: '',
+  icon: 'bi-folder',
+  phrasesCount: 0
+};
+
+$scope.salvarCategoria = function() {
+  if ($scope.novaCategoria.nome && $scope.novaCategoria.nome.trim() !== '') {
+    $scope.categories.push({
+      name: $scope.novaCategoria.nome,
+      icon: $scope.novaCategoria.icon,
+      phrasesCount: $scope.novaCategoria.phrasesCount
+    });
+    
+    // Limpa o formulário
+    $scope.novaCategoria.nome = '';
+    document.getElementById('contadorCaracteres').textContent = '100';
+  }
+};
+
+$scope.removeCategory = function(index) {
+  if (confirm('Tem certeza que deseja remover esta categoria?')) {
+    $scope.categories.splice(index, 1);
+  }
+};
+
+$scope.atualizarContador = function() {
+  const max = 100;
+  const restante = max - ($scope.novaCategoria.nome ? $scope.novaCategoria.nome.length : 0);
+  document.getElementById('contadorCaracteres').textContent = restante;
+};
 });

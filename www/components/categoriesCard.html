@@ -1,0 +1,10 @@
+<div class="category-card">
+  <div class="card-icon">
+    <i class="bi {{category.icon || 'bi-folder'}}"></i>
+  </div>
+  <h3 class="card-title">{{category.name}}</h3>
+  <p class="card-subtitle">{{category.phrasesCount || 0}} frases</p>
+  <button class="btn btn-sm btn-remove" ng-click="removeCategory($index)">
+    <i class="bi bi-trash"></i>
+  </button>
+</div>

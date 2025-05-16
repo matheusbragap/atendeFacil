@@ -1,11 +1,12 @@
-/* Container & Main Button */
+/* ====================== CONTAINER & MAIN LAYOUT ====================== */
 .categories-container {
-  background-color: #fff5f7;
+  background-color: #ff85a234;
   min-height: 100vh;
   padding: 20px 20px 100px;
   position: relative;
 }
 
+/* ====================== ADD CATEGORY BUTTON ====================== */
 .btn-add-category {
   position: fixed;
   bottom: 1.5rem;
@@ -33,13 +34,13 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Modal Styles */
+/* ====================== MODAL STYLES ====================== */
 .modal-header {
   background-color: #ff85a2;
   color: white;
 }
 
-/* Button Styles */
+/* ====================== SAVE BUTTON STATES ====================== */
 .btn-primary {
   background-color: #ff85a2;
   border: 1px solid #ff85a2;
@@ -47,12 +48,18 @@
   transition: all 0.2s;
 }
 
-.btn-primary:hover { background-color: #e6738f; }
+.btn-primary:hover { 
+  background-color: #e6738f;
+  border: 1px solid #ff85a2;
+}
+
 .btn-primary:active { 
   background-color: white !important; 
   color: #ff85a2 !important;
+  border: 1px solid #ff85a2 !important;
 }
 
+/* ====================== CLOSE BUTTON STATES ====================== */
 .btn-outline-secondary {
   background-color: white;
   border: 1px solid #ff85a2;
@@ -61,24 +68,21 @@
 }
 
 .btn-outline-secondary:hover {
-  background-color: #ff85a2;
-  color: white;
+  background-color: #ff85a22c;
+  color: #ff85a2;
+  border: 1px solid #ff85a2;
 }
 
 .btn-outline-secondary:active {
   background-color: #ff85a2 !important;
   color: white !important;
+  border: 1px solid #ff85a2 !important;
 }
 
-/* Form Styles */
+/* ====================== FORM ELEMENTS ====================== */
 .form-control:focus {
   border-color: #ff85a2;
   box-shadow: 0 0 0 0.25rem rgba(255, 133, 162, 0.25);
-}
-
-.text-muted span {
-  font-weight: bold;
-  color: #ff85a2;
 }
 
 .btn-primary:disabled {

@@ -3,6 +3,22 @@
 
 <!-- Conteúdo Principal -->
 <div class="container-fluid categories-container">
+  <!-- Cards de Categorias -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-4" ng-repeat="category in categories track by $index">
+      <div class="category-card">
+        <div class="card-icon">
+          <i class="bi {{category.icon || 'bi-folder'}}"></i>
+        </div>
+        <h3 class="card-title">{{category.name}}</h3>
+        <p class="card-subtitle">{{category.phrasesCount || 0}} frases</p>
+        <button class="btn btn-sm btn-remove" ng-click="removeCategory($index)">
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Botão Adicionar Categoria -->
   <button class="btn btn-add-category" data-bs-toggle="modal" data-bs-target="#meuModal">
     <i class="bi bi-plus-lg btn-icon"></i>
@@ -12,7 +28,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="meuModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <!-- Cabeçalho -->
       <div class="modal-header">
@@ -24,15 +40,7 @@
       <div class="modal-body">
         <div class="mb-3">
           <label for="categoriaNome" class="form-label">Título da Categoria</label>
-          <input 
-            type="text" 
-            class="form-control" 
-            id="categoriaNome" 
-            placeholder="Digite o nome da categoria (máx. 100 caracteres)"
-            maxlength="100"
-            ng-model="novaCategoria.nome"
-            ng-keyup="atualizarContador()"
-          >
+          <input type="text" class="form-control" id="categoriaNome" placeholder="Digite o nome da categoria (máx. 100 caracteres)" maxlength="100" ng-model="novaCategoria.nome" ng-keyup="atualizarContador()">
           <small class="text-muted float-end">
             <span id="contadorCaracteres">100</span>/100 caracteres restantes
           </small>
