@@ -5,17 +5,9 @@
 <div class="container-fluid categories-container">
   <!-- Cards de Categorias -->
   <div class="row g-3 mb-4">
-    <div class="col-md-4" ng-repeat="category in categories track by $index">
-      <div class="category-card">
-        <div class="card-icon">
-          <i class="bi {{category.icon || 'bi-folder'}}"></i>
-        </div>
-        <h3 class="card-title">{{category.name}}</h3>
-        <p class="card-subtitle">{{category.phrasesCount || 0}} frases</p>
-        <button class="btn btn-sm btn-remove" ng-click="removeCategory($index)">
-          <i class="bi bi-trash"></i>
-        </button>
-      </div>
+    <div class="col-md-4" ng-repeat="category in categories track by category.id">
+      <div ng-include="'components/categoriesCard.html'" 
+           ng-init="data = localDatabase.getData(); category = category"></div>
     </div>
   </div>
 

@@ -1,3 +1,58 @@
-.navbar {
-  border-bottom: 2px solid #ff85a2;
+/* ====================== navbar personalizada ====================== */
+
+.navbar-custom {
+  border-bottom: 2.5px solid #ff85a2;
+  min-height: 60px;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
+
+/* ====================== cores personalizadas ====================== */
+
+.text-pink {
+  color: #ff85a2 !important;
+}
+
+.bg-pink {
+  background-color: #ff85a2 !important;
+}
+
+/* ====================== efeitos de hover ====================== */
+/* efeito ao passar o mouse nos links do sidebar */
+.sidebar-link:hover {
+  background-color: rgba(255, 133, 162, 0.1);
+  color: #ff85a2 !important;
+}
+
+/* ====================== botão hambúrguer ====================== */
+.hamburger-btn {
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.hamburger-btn:hover {
+    background-color: rgba(255, 133, 162, 0.1);
+    transform: scale(1.1);
+}
+
+.hamburger-btn:active {
+    background-color: rgba(255, 133, 162, 0.2);
+    transform: scale(0.95);
+}
+
+
+
+/* .offcanvas.show {
+    visibility: visible;
+}
+
+/* pode precisar */
+/* .border-pink {
+    border-color: #ff85a2 !important;
+} */

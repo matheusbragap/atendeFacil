@@ -1,10 +1,49 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/" style="color: #ff85a2;">
-      <i class="bi bi-headset me-2"></i>
-      <span class="fw-bold">Atende Fácil</span>
-    </a>
-    <div class="collapse navbar-collapse" id="navbarNav">
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm navbar-custom">
+    <div class="container-fluid">
+        <button class="btn btn-link text-pink px-2 hamburger-btn" type="button" 
+                data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+            <i class="bi bi-list fs-3"></i>
+        </button>
+        <a class="navbar-brand text-pink mx-auto" href="#">
+            <i class="bi bi-headset me-2"></i>
+            <span class="fw-bold">Atende Fácil</span>
+        </a>
+        <div class="invisible px-2">
+            <i class="bi bi-list fs-3"></i>
+        </div>
     </div>
-  </div>
 </nav>
+
+<div class="offcanvas offcanvas-start offcanvas-sidebar" tabindex="-1" id="sidebar"
+     data-bs-scroll="true" data-bs-backdrop="false">
+    <div class="offcanvas-header border-bottom border-pink">
+        <h5 class="offcanvas-title text-pink">
+            <i class="bi bi-menu-button-wide me-2"></i>Menu
+        </h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link text-dark sidebar-link py-3" href="#" data-bs-dismiss="offcanvas">
+                    <i class="bi bi-house-door me-3 ms-2 text-pink"></i>Início
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark sidebar-link py-3" href="#" data-bs-dismiss="offcanvas">
+                    <i class="bi bi-folder me-3 ms-2 text-pink"></i>Categorias
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark sidebar-link py-3" href="#" data-bs-dismiss="offcanvas">
+                    <i class="bi bi-gear me-3 ms-2 text-pink"></i>Configurações
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark sidebar-link py-3" href="#" data-bs-dismiss="offcanvas">
+                    <i class="bi bi-question-circle me-3 ms-2 text-pink"></i>Ajuda
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,61 +1,71 @@
-app.controller('categoriesController', function($scope) {
-      $scope.novaCategoria = {
-    nome: ''
-  };
-  
-  // Inicializa o contador
-  $scope.contador = 100;
-  
-  // Atualiza o contador de caracteres
-  $scope.atualizarContador = function() {
-    $scope.contador = 100 - ($scope.novaCategoria.nome ? $scope.novaCategoria.nome.length : 0);
-    document.getElementById('contadorCaracteres').textContent = $scope.contador;
-  };
-  
-  // Função para salvar
-  $scope.salvarCategoria = function() {
-    if ($scope.novaCategoria.nome && $scope.novaCategoria.nome.length > 0) {
-      console.log('Categoria salva:', $scope.novaCategoria.nome);
-      // Aqui você adiciona a lógica para salvar
-      $('#meuModal').modal('hide'); // Fecha o modal
-      $scope.novaCategoria.nome = ''; // Limpa o campo
-      $scope.contador = 100; // Reseta o contador
-    }
-  };
-
-
- 
-$scope.categories = [];
-
-$scope.novaCategoria = {
-  nome: '',
-  icon: 'bi-folder',
-  phrasesCount: 0
-};
-
-$scope.salvarCategoria = function() {
-  if ($scope.novaCategoria.nome && $scope.novaCategoria.nome.trim() !== '') {
-    $scope.categories.push({
-      name: $scope.novaCategoria.nome,
-      icon: $scope.novaCategoria.icon,
-      phrasesCount: $scope.novaCategoria.phrasesCount
-    });
+angular.module('atendeFacil').controller('categoriesController', ['$scope', '$timeout', 'localDatabase', 
+function($scope, $timeout, localDatabase) {
+    // Inicialização
+    localDatabase.initialData();
+    $scope.data = localDatabase.getData();
+    $scope.categories = $scope.data.categories;
+    const MAX_CARACTERES = 100;
     
-    // Limpa o formulário
-    $scope.novaCategoria.nome = '';
-    document.getElementById('contadorCaracteres').textContent = '100';
-  }
-};
+    // Modelo para nova categoria
+    $scope.novaCategoria = { nome: '' };
+    $scope.contador = MAX_CARACTERES;
 
-$scope.removeCategory = function(index) {
-  if (confirm('Tem certeza que deseja remover esta categoria?')) {
-    $scope.categories.splice(index, 1);
-  }
-};
+    // Atualiza contador de caracteres
+    $scope.atualizarContador = function() {
+        $scope.contador = MAX_CARACTERES - ($scope.novaCategoria.nome?.length || 0);
+        document.getElementById('contadorCaracteres').textContent = $scope.contador;
+    };
 
-$scope.atualizarContador = function() {
-  const max = 100;
-  const restante = max - ($scope.novaCategoria.nome ? $scope.novaCategoria.nome.length : 0);
-  document.getElementById('contadorCaracteres').textContent = restante;
-};
-});
+    // Salva nova categoria
+    $scope.salvarCategoria = function() {
+        if ($scope.novaCategoria.nome?.trim()) {
+            localDatabase.addCategories($scope.novaCategoria.nome.trim());
+            $scope.categories = localDatabase.getData().categories;
+            $scope.resetarFormulario();
+            
+            // Fechar modal
+            var modalEl = document.getElementById('meuModal');
+            var modal = bootstrap.Modal.getInstance(modalEl);
+            if (modal) {
+                modal.hide();
+            }
+            
+            // Ajusta tamanhos após adicionar nova categoria
+            $timeout($scope.adjustTitleSizes, 300);
+        }
+    };
+
+    // Remove categoria
+    $scope.removeCategory = function(categoryId) {
+        if (confirm('Tem certeza que deseja remover esta categoria e todas suas frases?')) {
+            localDatabase.deleteCategories(categoryId);
+            $scope.categories = localDatabase.getData().categories;
+            
+            // Ajusta tamanhos após remover categoria
+            $timeout($scope.adjustTitleSizes, 300);
+        }
+    };
+
+    // Reseta formulário
+    $scope.resetarFormulario = function() {
+        $scope.novaCategoria = { nome: '' };
+        $scope.contador = MAX_CARACTERES;
+        document.getElementById('contadorCaracteres').textContent = MAX_CARACTERES;
+    };
+
+
+    $scope.handleCardClick = function(categoryId) {
+  
+        console.log('Card clicado:', categoryId);
+        $location.path('/category/' + categoryId);
+    };
+
+    $scope.removeCategory = function(event, categoryId) {
+        event.stopPropagation(); 
+        if (confirm('Tem certeza que deseja remover esta categoria?')) {
+            localDatabase.deleteCategories(categoryId);
+            $scope.categories = localDatabase.getData().categories;
+        }
+    };
+
+}]);
