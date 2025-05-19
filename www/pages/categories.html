@@ -1,8 +1,23 @@
 <!-- Header -->
 <div ng-include="'components/header.html'"></div>
-
 <!-- Conteúdo Principal -->
 <div class="container-fluid categories-container">
+  <!-- Mensagem quando não houver categorias -->
+  <div ng-if="categories.length === 0" class="empty-state-container">
+    <div class="empty-state animate-in">
+      <div class="empty-icon-container">
+        <i class="bi bi-folder-x empty-icon"></i>
+      </div>
+      <h2 class="empty-title">Nenhuma categoria encontrada</h2>
+      <p class="empty-description">Você ainda não criou nenhuma categoria</p>
+      <div class="empty-action">
+        <button class="btn btn-primary empty-btn" data-bs-toggle="modal" data-bs-target="#modalCategories">
+          <i class="bi bi-plus-circle"></i>
+          Criar Primeira Categoria
+        </button>
+      </div>
+    </div>
+  </div>
   <!-- Cards de Categorias -->
   <div class="row g-3 mb-4">
     <div class="col-md-4" ng-repeat="category in categories track by category.id">
@@ -29,7 +44,8 @@
 </div>
 
 <!-- Botão Adicionar Categoria -->
-<button class="btn btn-add-category" data-bs-toggle="modal" data-bs-target="#modalCategories">
+<button class="btn btn-add-category" ng-if="categories.length > 0" data-bs-toggle="modal"
+  data-bs-target="#modalCategories">
   <i class="bi bi-plus-lg btn-icon"></i>
   <span class="btn-text">Nova Categoria</span>
 </button>
@@ -42,27 +58,29 @@
       <!-- Cabeçalho -->
       <div class="modal-header">
         <h5 class="modal-title">Nova Categoria</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" ng-click="resetModal()" aria-label="Fechar"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" ng-click="resetModal()"
+          aria-label="Fechar"></button>
       </div>
 
       <!-- Corpo -->
       <div class="modal-body">
         <div class="mb-3">
           <label class="form-label">Título da Categoria</label>
-          <input type="text" class="form-control" placeholder="Digite o nome da categoria (máx. 100 caracteres)" maxlength="100" ng-model="newCategoryName">
+          <input type="text" class="form-control" placeholder="Digite o nome da categoria (máx. 100 caracteres)"
+            maxlength="100" ng-model="newCategoryName">
         </div>
       </div>
 
-        <!-- Rodapé -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" ng-click="resetModal()">
-            Fechar
-          </button>
-          <button type="button" class="btn btn-primary" ng-click="saveCategory(newCategoryName)"
-            ng-disabled="!newCategoryName">
-            Salvar
-          </button>
-        </div>
+      <!-- Rodapé -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" ng-click="resetModal()">
+          Fechar
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="saveCategory(newCategoryName)"
+          ng-disabled="!newCategoryName">
+          Salvar
+        </button>
       </div>
     </div>
   </div>
+</div>
