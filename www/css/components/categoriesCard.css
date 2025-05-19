@@ -79,7 +79,7 @@
 }
 
 /* muda o tamanho do texto de acordo com a quantidade de linhas */
-.card-title[data-length^="0"] {
+.card-title[data-length^="1"] {
   font-size: clamp(1.4rem, 3vw + 0.5rem, 2.1rem);
 }
 

@@ -6,48 +6,63 @@
   <!-- Cards de Categorias -->
   <div class="row g-3 mb-4">
     <div class="col-md-4" ng-repeat="category in categories track by category.id">
-      <div ng-include="'components/categoriesCard.html'" 
-           ng-init="data = localDatabase.getData(); category = category"></div>
+      <div class="category-card" ng-click="handleCardClick(category.id)">
+        <button class="btn-remove" ng-click="removeCategory(category.id)">
+          <i class="bi bi-trash"></i>
+        </button>
+
+        <div class="card-content">
+          <div class="card-icon">
+            <i class="bi bi-folder"></i>
+          </div>
+
+          <h3 class="card-title" title="{{category.name}}"
+            data-length="{{category.name.length <= 20 ? '0-20' : (category.name.length <= 40 ? '21-40' : '41+')}}">
+            {{category.name}}
+          </h3>
+
+          <p class="card-subtitle">{{data.phrases[category.id].length}} frases</p>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 
-  <!-- Botão Adicionar Categoria -->
-  <button class="btn btn-add-category" data-bs-toggle="modal" data-bs-target="#meuModal">
-    <i class="bi bi-plus-lg btn-icon"></i>
-    <span class="btn-text">Nova Categoria</span>
-  </button>
+<!-- Botão Adicionar Categoria -->
+<button class="btn btn-add-category" data-bs-toggle="modal" data-bs-target="#modalCategories">
+  <i class="bi bi-plus-lg btn-icon"></i>
+  <span class="btn-text">Nova Categoria</span>
+</button>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="meuModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modalCategories" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <!-- Cabeçalho -->
       <div class="modal-header">
         <h5 class="modal-title">Nova Categoria</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" ng-click="resetModal()" aria-label="Fechar"></button>
       </div>
-      
+
       <!-- Corpo -->
       <div class="modal-body">
         <div class="mb-3">
-          <label for="categoriaNome" class="form-label">Título da Categoria</label>
-          <input type="text" class="form-control" id="categoriaNome" placeholder="Digite o nome da categoria (máx. 100 caracteres)" maxlength="100" ng-model="novaCategoria.nome" ng-keyup="atualizarContador()">
-          <small class="text-muted float-end">
-            <span id="contadorCaracteres">100</span>/100 caracteres restantes
-          </small>
+          <label class="form-label">Título da Categoria</label>
+          <input type="text" class="form-control" placeholder="Digite o nome da categoria (máx. 100 caracteres)" maxlength="100" ng-model="newCategoryName">
         </div>
       </div>
-      
-      <!-- Rodapé -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-          Fechar
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="salvarCategoria()" ng-disabled="!novaCategoria.nome || novaCategoria.nome.length === 0">
-          Salvar
-        </button>
+
+        <!-- Rodapé -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" ng-click="resetModal()">
+            Fechar
+          </button>
+          <button type="button" class="btn btn-primary" ng-click="saveCategory(newCategoryName)"
+            ng-disabled="!newCategoryName">
+            Salvar
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
