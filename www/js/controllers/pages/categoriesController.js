@@ -1,14 +1,20 @@
-angular.module('atendeFacil').controller('categoriesController', ['$scope', '$timeout', 'localDatabase', function ($scope, $timeout, localDatabase) {
+angular.module('atendeFacil').controller('categoriesController', ['$scope', '$timeout', 'localDatabase', '$location', function ($scope, $timeout, localDatabase, $location) {
     // Inicialização
     localDatabase.initialData() // cria caso n exista o banco de dados
     $scope.data = localDatabase.getData()
     $scope.categories = $scope.data.categories
 
+    $scope.goToPhrases = function (categoryId) {
+        $location.path('/phrases/' + categoryId)
+    }
     //######################## CARDS CATEGORY ############################################
-    $scope.removeCategory = function (categoryId) {     // Remove categoria
+
+
+    $scope.removeCategory = function (categoryId, $event) {
+        $event.stopPropagation() // impede de clicar no card 
         if (confirm('Tem certeza que deseja remover esta categoria e todas suas frases?')) {
             localDatabase.deleteCategories(categoryId)
-            $scope.categories = localDatabase.getData().categories // atualiza
+            $scope.categories = localDatabase.getData().categories
         }
     }
 

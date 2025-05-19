@@ -44,9 +44,6 @@ angular.module('atendeFacil').service('localDatabase', function () {
     }
     // ############################################################################
 
-
-
-    
     this.addPhrases = function (categoryId, phraseText) { //add phrases
         let data = this.getData()
         // add no futuro um log caso o resultado seja verdade

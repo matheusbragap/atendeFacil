@@ -6,8 +6,8 @@
   <!-- Cards de Categorias -->
   <div class="row g-3 mb-4">
     <div class="col-md-4" ng-repeat="category in categories track by category.id">
-      <div class="category-card" ng-click="handleCardClick(category.id)">
-        <button class="btn-remove" ng-click="removeCategory(category.id)">
+      <div class="category-card" ng-click="goToPhrases(category.id)">
+        <button class="btn-remove" ng-click="removeCategory(category.id, $event)">
           <i class="bi bi-trash"></i>
         </button>
 

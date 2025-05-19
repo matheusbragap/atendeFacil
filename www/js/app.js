@@ -5,9 +5,9 @@ var app = angular.module('atendeFacil', ['ngRoute'])
             templateUrl: 'pages/categories.html',
             controller: 'categoriesController'
         })
-        .when('/phrases', {
+        .when('/phrases/:categoryId', {
             templateUrl: 'pages/phrases.html',
             controller: 'phrasesController'
         })
-        .otherwise({ redirectTo: '/' });
-});
+        .otherwise({ redirectTo: '/' })
+})
