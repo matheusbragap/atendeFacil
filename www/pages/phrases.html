@@ -4,11 +4,14 @@
 <!-- Conteúdo Principal -->
 <div class="container-fluid phrases-container">
     <!-- Estado Vazio (sem frases) -->
-    <div ng-if="phrases.length === 0" class="phrases-header">
+    <div class="phrases-header">
         <button class="btn-back" ng-click="goBack()">
             <i class="bi bi-arrow-left"></i> Voltar
         </button>
         <h1 class="category-title">{{currentCategory.name}}</h1>
+        <div class="badge bg-pink rounded-pill ms-auto">
+            {{phrases.length}} {{phrases.length === 1 ? 'frase' : 'frases'}}
+        </div>
     </div>
     <div ng-if="phrases.length === 0" class="phrases-empty-state animate-in">
         <div class="empty-message">
@@ -28,14 +31,28 @@
     <!-- Estado com Frases -->
     <div ng-if="phrases.length > 0" class="phrases-list">
         <div class="row g-3">
-            <div class="col-md-6" ng-repeat="phrase in phrases track by $index">
-                <div class="phrase-card">
-                    <p class="phrase-text">{{phrase}}</p>
+            <div class="col-md-6 col-12" ng-repeat="phrase in phrases track by $index">
+                <div class="phrase-card" ng-class="{'expanded': expandedCards[$index]}">
+                    <div class="phrase-number">{{$index + 1}}.</div>
+                    <p class="phrase-text"
+                        ng-class="{'text-collapsed': !expandedCards[$index] && shouldCollapse(phrase)}">
+                        {{phrase}}
+                        <span class="read-more" ng-if="!expandedCards[$index] && shouldCollapse(phrase)"
+                            ng-click="toggleExpand($index, $event)">
+                            ... ler mais
+                        </span>
+                    </p>
                     <div class="phrase-actions">
-                        <button class="btn-action btn-copy" ng-click="copyPhrase(phrase, $index)">
+                        <button class="btn-action btn-edit" ng-click="editPhrase($index, $event)"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Editar frase">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn-action btn-copy" ng-click="copyPhrase(phrase, $index)"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Copiar frase">
                             <i class="bi bi-clipboard"></i>
                         </button>
-                        <button class="btn-action btn-delete" ng-click="deletePhrase($index)">
+                        <button class="btn-action btn-delete" ng-click="deletePhrase($index)" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Excluir frase">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
@@ -43,7 +60,6 @@
             </div>
         </div>
     </div>
-
     <!-- Botão Flutuante (quando tem frases) -->
     <button ng-if="phrases.length > 0" class="btn-floating" data-bs-toggle="modal" data-bs-target="#modalPhrases">
         <i class="bi bi-plus-lg"></i>

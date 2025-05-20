@@ -35,4 +35,50 @@ angular.module('atendeFacil').controller('phrasesController', ['$scope', '$route
     }
 
 
+
+
+
+
+
+
+
+    // // teste para ler mais ###########################################
+    // $scope.expandedCards = {};
+
+    // // Verifica se o texto precisa do "ler mais"
+    // $scope.shouldCollapse = function (text) {
+    //     const lineCount = (text.match(/\n/g) || []).length + 1;
+    //     return lineCount > 10 || text.length > 500;
+    // };
+
+    // // Alterna entre expandido/recolhido
+    // $scope.toggleExpand = function (index, event) {
+    //     $scope.expandedCards[index] = !$scope.expandedCards[index];
+    //     event.stopPropagation(); // Evita que o clique propague para outros elementos
+    // };
+
+    // // Função para editar frase (você precisará implementar a lógica completa)
+    // $scope.editPhrase = function (index, event) {
+    //     // Exemplo básico - você deve adaptar para sua implementação
+    //     const phraseToEdit = $scope.phrases[index];
+    //     $scope.newPhraseText = phraseToEdit;
+    //     $('#modalPhrases').modal('show');
+    //     $scope.editingIndex = index;
+    //     event.stopPropagation();
+    // };
+
+    // // Modifique sua função savePhrase para lidar com edição
+    // $scope.savePhrase = function (text) {
+    //     if ($scope.editingIndex !== undefined) {
+    //         // Edição de frase existente
+    //         $scope.phrases[$scope.editingIndex] = text;
+    //         $scope.editingIndex = undefined;
+    //     } else {
+    //         // Adição de nova frase
+    //         $scope.phrases.push(text);
+    //     }
+    //     $scope.newPhraseText = '';
+    //     $('#modalPhrases').modal('hide');
+    // };
+
 }])
