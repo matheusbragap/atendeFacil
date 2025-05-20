@@ -12,12 +12,13 @@
   ],
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
-  "devDependencies": {
-    "cordova-electron": "^4.0.0"
-  },
   "cordova": {
     "platforms": [
       "electron"
     ]
+  },
+  "dependencies": {
+    "cordova-electron": "^4.0.0",
+    "electron": "^36.2.1"
   }
 }
