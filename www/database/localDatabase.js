@@ -42,8 +42,7 @@ angular.module('atendeFacil').service('localDatabase', function () {
 
         return newCategory.id
     }
-    // ############################################################################
-
+    // ######################## ADD PHRASES ##############################
     this.addPhrases = function (categoryId, phraseText) { //add phrases
         let data = this.getData()
         // add no futuro um log caso o resultado seja verdade
@@ -51,7 +50,7 @@ angular.module('atendeFacil').service('localDatabase', function () {
         data.phrases[categoryId].push(phraseText)
         localStorage.setItem(keyStorage, JSON.stringify(data))
     }
-
+    // ######################## DELETE CATEGORIES ##############################
     this.deleteCategories = function (categoryId) { //delete categories
         let data = this.getData()
 

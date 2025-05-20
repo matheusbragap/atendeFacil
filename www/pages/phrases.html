@@ -2,30 +2,25 @@
 <div ng-include="'components/header.html'"></div>
 
 <!-- Conteúdo Principal -->
-<div class="container-fluid phrases-container" ng-controller="phrasesController">
-    <!-- Cabeçalho com Botão Voltar e Nome da Categoria -->
-    <div class="phrases-header">
+<div class="container-fluid phrases-container">
+    <!-- Estado Vazio (sem frases) -->
+    <div ng-if="phrases.length === 0" class="phrases-header">
         <button class="btn-back" ng-click="goBack()">
             <i class="bi bi-arrow-left"></i> Voltar
         </button>
         <h1 class="category-title">{{currentCategory.name}}</h1>
     </div>
-
-    <!-- Estado Vazio (sem frases) -->
     <div ng-if="phrases.length === 0" class="phrases-empty-state animate-in">
         <div class="empty-message">
             <div class="icon-container">
                 <i class="bi bi-chat-square-text empty-icon"></i>
             </div>
             <h3>Nenhuma frase aqui ainda</h3>
-            <p class="empty-hint">Comece digitando sua primeira frase abaixo</p>
+            <p class="empty-hint">Comece digitando sua primeira frase</p>
         </div>
-
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Ex: Bom dia, como posso ajudar?"
-                ng-model="newPhraseText">
-            <button class="btn btn-add" ng-click="savePhrase(newPhraseText)">
-                <i class="bi bi-plus-lg"></i> Adicionar
+        <div class="empty-group">
+            <button class="btn btn-primary empty-btn" data-bs-toggle="modal" data-bs-target="#modalPhrases">
+                <i class="bi bi-plus-lg"></i> Adicionar Primeira Frase
             </button>
         </div>
     </div>
@@ -62,18 +57,21 @@
             <div class="modal-header">
                 <h5 class="modal-title">Nova Frase</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                    ng-click="resetPhraseModal()" aria-label="Fechar"></button>
+                    aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
                     <label class="form-label">Texto da Frase</label>
-                    <textarea class="form-control" placeholder="Digite sua frase" rows="3"
-                        ng-model="newPhraseText"></textarea>
+                    <textarea class="form-control" placeholder="Digite sua frase" rows="3" ng-model="newPhraseText"
+                        maxlength="2000"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
-                    ng-click="resetPhraseModal()">
+                <button type="button" class="btn btn-clean text-muted me-auto border-0 bg-transparent p-0"
+                    ng-click="confirmClearText()" ng-disabled="!newPhraseText">
+                    <i class="bi bi-eraser me-1"></i> Limpar
+                </button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     Fechar
                 </button>
                 <button type="button" class="btn btn-primary" ng-click="savePhrase(newPhraseText)"

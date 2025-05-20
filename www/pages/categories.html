@@ -36,8 +36,7 @@
             {{category.name}}
           </h3>
 
-          <p class="card-subtitle">{{ data.phrases[category.id].length == 0 ? "Sem frases!":
-            data.phrases[category.id].length }}</p>
+          <p class="card-subtitle">{{ data.phrases[category.id].length == 0 ? "Sem frases!": data.phrases[category.id].length == 1 ? data.phrases[category.id].length + " frase" : data.phrases[category.id].length + " frases"}}</p>
         </div>
       </div>
     </div>
