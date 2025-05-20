@@ -2,7 +2,7 @@
 <div ng-include="'components/header.html'"></div>
 <!-- Conteúdo Principal -->
 <div class="container-fluid categories-container">
-  <!-- Mensagem quando não houver categorias -->
+  <!-- Estado Vazio de Categorias -->
   <div ng-if="categories.length === 0" class="empty-state-container">
     <div class="empty-state animate-in">
       <div class="empty-icon-container">
@@ -11,7 +11,7 @@
       <h2 class="empty-title">Nenhuma categoria encontrada</h2>
       <p class="empty-description">Você ainda não criou nenhuma categoria</p>
       <div class="empty-action">
-        <button class="btn btn-primary empty-btn" data-bs-toggle="modal" data-bs-target="#modalCategories">
+        <button class="btn btn-primary empty-btn" data-bs-toggle="modal" data-bs-target="#modalCategories" ng-click="resetModal()">
           <i class="bi bi-plus-circle"></i>
           Criar Primeira Categoria
         </button>
@@ -36,7 +36,8 @@
             {{category.name}}
           </h3>
 
-          <p class="card-subtitle">{{data.phrases[category.id].length}} frases</p>
+          <p class="card-subtitle">{{ data.phrases[category.id].length == 0 ? "Sem frases!":
+            data.phrases[category.id].length }}</p>
         </div>
       </div>
     </div>
@@ -45,7 +46,7 @@
 
 <!-- Botão Adicionar Categoria -->
 <button class="btn btn-add-category" ng-if="categories.length > 0" data-bs-toggle="modal"
-  data-bs-target="#modalCategories">
+  data-bs-target="#modalCategories" ng-click="resetModal()">
   <i class="bi bi-plus-lg btn-icon"></i>
   <span class="btn-text">Nova Categoria</span>
 </button>
@@ -58,8 +59,7 @@
       <!-- Cabeçalho -->
       <div class="modal-header">
         <h5 class="modal-title">Nova Categoria</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" ng-click="resetModal()"
-          aria-label="Fechar"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
       </div>
 
       <!-- Corpo -->
@@ -73,7 +73,7 @@
 
       <!-- Rodapé -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" ng-click="resetModal()">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
           Fechar
         </button>
         <button type="button" class="btn btn-primary" ng-click="saveCategory(newCategoryName)"

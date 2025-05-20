@@ -1,12 +1,11 @@
-/* ====================== layout principal ====================== */
-
+/* ====================== LAYOUT PRINCIPAL ====================== */
 .categories-container {
-  min-height: calc(100vh - 120px); /* ajuste conforme necessário */
+  min-height: calc(100vh - 120px);
   padding: 20px;
   position: relative;
 }
 
-/* ====================== botão flutuante (nova categoria) ====================== */
+/* ====================== BOTÃO FLUTUANTE ====================== */
 .btn-add-category {
   position: fixed;
   bottom: 1.5rem;
@@ -42,13 +41,13 @@
   border: 1px solid #ff85a2 !important;
 }
 
-/* ====================== estilos do modal ====================== */
+/* ====================== MODAL ====================== */
 .modal-header {
   background-color: #ff85a2;
   color: white;
 }
 
-/* ====================== botão primário (salvar) ====================== */
+/* ====================== BOTÕES ====================== */
 .btn-primary {
   background-color: #ff85a2;
   border: 1px solid #ff85a2;
@@ -75,7 +74,6 @@
   outline: none;
 }
 
-/* ====================== botão secundário (fechar) ====================== */
 .btn-outline-secondary {
   background-color: white;
   border: 1px solid #ff85a2;
@@ -103,7 +101,7 @@
   outline: none;
 }
 
-/* ====================== elementos de formulário ====================== */
+/* ====================== FORMULÁRIOS ====================== */
 .form-control:focus {
   border-color: #ff85a2;
   box-shadow: 0 0 0 0.25rem rgba(255, 133, 162, 0.25);
@@ -112,110 +110,4 @@
 .btn-primary:disabled {
   background-color: #ccc;
   border-color: #ccc;
-}
-
-/* ====================== empty cards ====================== */
-/* Container principal */
-.empty-state-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 70vh;
-  padding: 2rem;
-  text-align: center;
-}
-
-.empty-state {
-  max-width: 400px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.empty-state.animate-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.empty-icon-container {
-  margin-bottom: 1.5rem;
-}
-
-.empty-icon {
-  font-size: 4.5rem;
-  color: var(--bs-gray-500);
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 0.4s ease 0.1s;
-}
-
-.animate-in .empty-icon {
-  opacity: 0.8;
-  transform: scale(1);
-}
-
-.empty-title {
-  font-size: 1.8rem;
-  color: var(--bs-dark);
-  margin-bottom: 0.75rem;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.4s ease 0.2s;
-}
-
-.animate-in .empty-title {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.empty-description {
-  font-size: 1.1rem;
-  color: var(--bs-gray-600);
-  margin-bottom: 2rem;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.4s ease 0.3s;
-}
-
-.animate-in .empty-description {
-  opacity: 0.9;
-  transform: translateY(0);
-}
-
-.empty-action {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.4s ease 0.4s;
-}
-
-.animate-in .empty-action {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.empty-btn {
-  padding: 0.75rem 2rem;
-  border-radius: 50px;
-  font-weight: 500;
-  box-shadow: 0 4px 12px rgba(var(--bs-primary-rgb), 0.15);
-  transition: all 0.3s ease;
-}
-
-.empty-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(var(--bs-primary-rgb), 0.2);
-}
-
-.empty-btn i {
-  margin-right: 0.5rem;
-}
-
-.empty-icon-container:hover .empty-icon {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.1); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.8; }
 }

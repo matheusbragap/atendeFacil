@@ -1,2 +1,86 @@
 <!-- Header -->
 <div ng-include="'components/header.html'"></div>
+
+<!-- Conteúdo Principal -->
+<div class="container-fluid phrases-container" ng-controller="phrasesController">
+    <!-- Cabeçalho com Botão Voltar e Nome da Categoria -->
+    <div class="phrases-header">
+        <button class="btn-back" ng-click="goBack()">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </button>
+        <h1 class="category-title">{{currentCategory.name}}</h1>
+    </div>
+
+    <!-- Estado Vazio (sem frases) -->
+    <div ng-if="phrases.length === 0" class="phrases-empty-state animate-in">
+        <div class="empty-message">
+            <div class="icon-container">
+                <i class="bi bi-chat-square-text empty-icon"></i>
+            </div>
+            <h3>Nenhuma frase aqui ainda</h3>
+            <p class="empty-hint">Comece digitando sua primeira frase abaixo</p>
+        </div>
+
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Ex: Bom dia, como posso ajudar?"
+                ng-model="newPhraseText">
+            <button class="btn btn-add" ng-click="savePhrase(newPhraseText)">
+                <i class="bi bi-plus-lg"></i> Adicionar
+            </button>
+        </div>
+    </div>
+
+    <!-- Estado com Frases -->
+    <div ng-if="phrases.length > 0" class="phrases-list">
+        <div class="row g-3">
+            <div class="col-md-6" ng-repeat="phrase in phrases track by $index">
+                <div class="phrase-card">
+                    <p class="phrase-text">{{phrase}}</p>
+                    <div class="phrase-actions">
+                        <button class="btn-action btn-copy" ng-click="copyPhrase(phrase, $index)">
+                            <i class="bi bi-clipboard"></i>
+                        </button>
+                        <button class="btn-action btn-delete" ng-click="deletePhrase($index)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão Flutuante (quando tem frases) -->
+    <button ng-if="phrases.length > 0" class="btn-floating" data-bs-toggle="modal" data-bs-target="#modalPhrases">
+        <i class="bi bi-plus-lg"></i>
+    </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalPhrases" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nova Frase</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    ng-click="resetPhraseModal()" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Texto da Frase</label>
+                    <textarea class="form-control" placeholder="Digite sua frase" rows="3"
+                        ng-model="newPhraseText"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                    ng-click="resetPhraseModal()">
+                    Fechar
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="savePhrase(newPhraseText)"
+                    ng-disabled="!newPhraseText">
+                    Salvar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

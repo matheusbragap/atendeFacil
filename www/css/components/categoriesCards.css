@@ -3,7 +3,7 @@
   background: white;
   border: 2px solid #ff85a2;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   height: 220px;
@@ -16,7 +16,7 @@
 
 .category-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   border-color: #e6738f;
 }
 
@@ -109,4 +109,129 @@
   right: 10px;
   top: 10px;
   z-index: 1;
+}
+
+/* ====================== ESTADO VAZIO ====================== */
+.empty-state-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70vh;
+  position: relative;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  flex-direction: column;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.empty-state {
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  transform: none;
+}
+
+.empty-icon-container {
+  margin-bottom: 1.5rem;
+}
+
+.empty-icon {
+  font-size: 4.5rem;
+  color: #ff85a2;
+  display: inline-block;
+  animation: bounce 2s infinite ease-in-out;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.animate-in .empty-icon {
+  animation:
+    fadeInUp 0.5s ease-out 0.1s forwards,
+    bounce 2s infinite ease-in-out 0.6s;
+  /* Inicia depois do fadeInUp */
+}
+
+.empty-title {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 0.75rem;
+  opacity: 0;
+}
+
+.animate-in .empty-title {
+  animation: fadeInUp 0.5s ease-out 0.2s forwards;
+}
+
+.empty-description {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+  opacity: 0;
+}
+
+.animate-in .empty-description {
+  animation: fadeInUp 0.5s ease-out 0.3s forwards;
+}
+
+.empty-action {
+  opacity: 0;
+}
+
+.animate-in .empty-action {
+  animation: fadeInUp 0.5s ease-out 0.4s forwards;
+}
+
+.empty-btn {
+  background-color: #ff85a2;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  color: white;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(255, 133, 162, 0.3);
+  transition: all 0.3s ease;
+}
+
+.empty-btn:hover {
+  background-color: #e6738f;
+  box-shadow: 0 6px 16px rgba(255, 133, 162, 0.4);
+}
+
+.empty-btn i {
+  transition: transform 0.3s ease;
+}
+
+.empty-btn:hover i {
+  transform: scale(1.1);
+}
+
+/* ====================== ANIMAÇÕES ====================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
 }
