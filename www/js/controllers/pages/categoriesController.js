@@ -3,6 +3,7 @@ angular.module('atendeFacil').controller('categoriesController', ['$scope', '$ti
     localDatabase.initialData() // cria caso n exista o banco de dados
     $scope.data = localDatabase.getData()
     $scope.categories = $scope.data.categories
+    $scope.phrases = $scope.data.phrases
 
     $scope.goToPhrases = function (categoryId) {
         $location.path('/phrases/' + categoryId)
@@ -21,7 +22,9 @@ angular.module('atendeFacil').controller('categoriesController', ['$scope', '$ti
     //######################## MODAL ############################################
     $scope.saveCategory = function (newCategoryName) { // salva nova categoria
         localDatabase.addCategories(newCategoryName) // add no database
-        $scope.categories = localDatabase.getData().categories //atualiza
+        $scope.data = localDatabase.getData() //pega banco
+        $scope.categories = $scope.data.categories //atualiza categories
+        $scope.phrases = $scope.data.phrases //atualiza frases
         let modal = bootstrap.Modal.getInstance(document.getElementById('modalCategories')) // seta modal na variavel
         modal.hide() // fecha modal
         $scope.resetModal()
