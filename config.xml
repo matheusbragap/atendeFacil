@@ -5,6 +5,9 @@
     <author email="dev@cordova.apache.org" href="https://cordova.apache.org">
         Apache Cordova Team
     </author>
+    <platform name="electron">
+    <preference name="ElectronSettingsFilePath" value="www/res/electron/settings.json" />
+    </platform>
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
