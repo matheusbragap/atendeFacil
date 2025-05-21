@@ -1,7 +1,11 @@
 {
-    "browserWindow": {
-        "width": 1024,
-        "height": 768,
-        "resizable": false
+  "browserWindow": {
+    "width": 1280,
+    "height": 720,
+    "minWidth": 640,
+    "minHeight": 480,
+    "webPreferences": {
+      "nodeIntegration": true
     }
+  }
 }
