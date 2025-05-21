@@ -9,7 +9,7 @@
         <preference name="ElectronSettingsFilePath" value="www/res/electron/settings.json" />
         <icon src="www/res/windows/icon.png" target="installer"></icon>
         <icon src="www/res/windows/icon.png" target="app"></icon>
-    <resource-file src="www/js/preload.js" target="www/res/electron/preload.js" />
+        <hook type="after_prepare" src="www/res/electron/hooks/removeMenu.js" />
     </platform>
     <content src="index.html" />
     <allow-intent href="http://*/*" />
