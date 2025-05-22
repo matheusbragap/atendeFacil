@@ -11,7 +11,8 @@
       <h2 class="empty-title">Nenhuma categoria encontrada</h2>
       <p class="empty-description">Você ainda não criou nenhuma categoria</p>
       <div class="empty-action">
-        <button class="btn btn-primary empty-btn" data-bs-toggle="modal" data-bs-target="#modalCategories" ng-click="resetModal()">
+        <button class="btn btn-primary empty-btn" data-bs-toggle="modal" data-bs-target="#modalCategories"
+          ng-click="resetModal()">
           <i class="bi bi-plus-circle"></i>
           Criar Primeira Categoria
         </button>
@@ -22,7 +23,7 @@
   <div class="row g-3 mb-4">
     <div class="col-md-4" ng-repeat="category in categories track by category.id">
       <div class="category-card" ng-click="goToPhrases(category.id)">
-        <button class="btn-remove" ng-click="removeCategory(category.id, $event)">
+        <button class="btn-remove" ng-click="removeCategory(category.id, $event)" title="Excluir">
           <i class="bi bi-trash"></i>
         </button>
 
@@ -31,12 +32,14 @@
             <i class="bi bi-folder"></i>
           </div>
 
-          <h3 class="card-title" title="{{category.name}}"
+          <h3 class="card-title" title="Categoria"
             data-length="{{category.name.length <= 20 ? '0-20' : (category.name.length <= 40 ? '21-40' : '41+')}}">
             {{category.name}}
           </h3>
 
-          <p class="card-subtitle">{{ data.phrases[category.id].length == 0 ? "Sem frases!": data.phrases[category.id].length == 1 ? data.phrases[category.id].length + " frase" : data.phrases[category.id].length + " frases"}}</p>
+          <p class="card-subtitle" title="Frases">{{ data.phrases[category.id].length == 0 ? "Sem frases!":
+            data.phrases[category.id].length == 1 ? data.phrases[category.id].length + " frase" :
+            data.phrases[category.id].length + " frases"}}</p>
         </div>
       </div>
     </div>

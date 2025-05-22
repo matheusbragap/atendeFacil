@@ -30,30 +30,31 @@
 
     <!-- Estado com Frases -->
     <div ng-if="phrases.length > 0" class="phrases-list">
-        <div class="row g-3">
-            <div class="col-md-6 col-12" ng-repeat="phrase in phrases track by $index">
-                <div class="phrase-card" ng-class="{'expanded': expandedCards[$index]}">
-                    <div class="phrase-number">{{$index + 1}}.</div>
-                    <p class="phrase-text"
-                        ng-class="{'text-collapsed': !expandedCards[$index] && shouldCollapse(phrase)}">
-                        {{phrase}}
-                        <span class="read-more" ng-if="!expandedCards[$index] && shouldCollapse(phrase)"
-                            ng-click="toggleExpand($index, $event)">
-                            ... ler mais
-                        </span>
-                    </p>
+        <div class="phrases-grid">
+            <div class="phrase-item" ng-repeat="phrase in phrases track by $index">
+                <div class="phrase-card">
+                    <div class="phrase-content">
+                        <div class="phrase-number">{{getRowBasedNumber($index)}}.</div>
+                        <p class="phrase-text"
+                            ng-class="{'text-collapsed': !expandedCards[$index] && shouldCollapse(phrase)}">
+                            {{phrase}}
+                            <span class="read-more" ng-if="!expandedCards[$index] && shouldCollapse(phrase)"
+                                ng-click="toggleExpand($index, $event)">
+                                ... ler mais
+                            </span>
+                        </p>
+                    </div>
                     <div class="phrase-actions">
-                        <button class="btn-action btn-edit" ng-click="editPhrase($index, $event)"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Editar frase">
+                        <button class="btn-action btn-edit" data-bs-toggle="modal" data-bs-target="#editPhraseModal"
+                            data-bs-placement="top" title="Editar" ng-click="startEditing(phrase, $index)">
                             <i class="bi bi-pencil"></i>
                         </button>
                         <button class="btn-action btn-copy" ng-click="copyPhrase(phrase, $event)"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Copiar frase">
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Copiar">
                             <i class="bi bi-clipboard"></i>
                         </button>
-                        <button class="btn-action btn-delete"
-                            ng-click="deletePhrase(phrase, $index)" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Excluir frase">
+                        <button class="btn-action btn-delete" ng-click="deletePhrase(phrase, $index)"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Excluir">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
@@ -67,7 +68,40 @@
     </button>
 </div>
 
-<!-- Modal -->
+
+<!-- modal edit phrase -->
+<div class="modal fade" id="editPhraseModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Frase</h5>
+                <button type="button" class="btn-close btn-close-white" ng-click="closeEditModal()"
+                    aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Texto Novo da Frase</label>
+                    <textarea class="form-control" placeholder="Digite sua frase" rows="3" ng-model="editPhraseText"
+                        maxlength="2000"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-clean text-muted me-auto border-0 bg-transparent p-0"
+                    ng-click="clearText()" ng-disabled="!editPhraseText">
+                    <i class="bi bi-eraser me-1"></i> Limpar
+                </button>
+                <button type="button" class="btn btn-outline-secondary" ng-click="closeEditModal()">
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="confirmEditPhrase()"
+                    ng-disabled="!editPhraseText">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal create phrases -->
 <div class="modal fade" id="modalPhrases" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -85,7 +119,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-clean text-muted me-auto border-0 bg-transparent p-0"
-                    ng-click="confirmClearText()" ng-disabled="!newPhraseText">
+                    ng-click="clearText()" ng-disabled="!newPhraseText">
                     <i class="bi bi-eraser me-1"></i> Limpar
                 </button>
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">

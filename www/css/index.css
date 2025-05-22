@@ -2,3 +2,27 @@ body {
   background-color: #FFE6EC;
   padding-top: 60px;
 }
+
+/* Estilos para o modal de confirmação */
+#confirmModal {
+  z-index: 2100 !important;
+}
+
+/* Backdrop específico para o modal de confirmação */
+.confirm-backdrop {
+  z-index: 2090 !important;
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  position: fixed !important;
+  inset: 0 !important;
+  display: block !important;
+  backdrop-filter: blur(2px);
+}
+
+/* Garante que outros modais fiquem abaixo do backdrop do confirm */
+.modal:not(#confirmModal) {
+  z-index: 1055;
+}
+
+.modal-backdrop:not(.confirm-backdrop) {
+  z-index: 1050;
+}

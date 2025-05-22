@@ -1,0 +1,20 @@
+<!-- Modal de Confirmação -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-4" id="confirmModalLabel">{{confirmModal.title}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body fs-5 p-4">
+                {{confirmModal.message}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary fs-5 px-4"
+                    data-bs-dismiss="modal">{{confirmModal.cancelText}}</button>
+                <button type="button" class="btn btn-primary fs-5 px-4"
+                    ng-click="confirmModal.onConfirm()">{{confirmModal.confirmText}}</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,77 +1,99 @@
 angular.module('atendeFacil').service('localDatabase', function () {
-    const keyStorage = "database"
+    const KEY_STORAGE = "database";
+    const INITIAL_DATA = { categories: [], phrases: {} };
 
-    this.initialData = function () {
-        if (!localStorage.getItem(keyStorage)) { //inicializa caso n exista os dados
-            localStorage.setItem(keyStorage, JSON.stringify({ categories: [], phrases: {} }))
+    // Funções auxiliares privadas
+    const getData = () => {
+        return JSON.parse(localStorage.getItem(KEY_STORAGE));
+    };
+
+    const saveData = (data) => {
+        localStorage.setItem(KEY_STORAGE, JSON.stringify(data));
+    };
+
+    const validateCategoryId = (data, categoryId) => {
+        return data.phrases && data.phrases[categoryId];
+    };
+
+    // Inicialização
+    this.initialData = () => {
+        if (!localStorage.getItem(KEY_STORAGE)) {
+            saveData(INITIAL_DATA);
         }
-    }
+    };
 
-    this.getData = function () { //obter dados
-        return JSON.parse(localStorage.getItem(keyStorage))
-    }
+    // Métodos públicos
+    this.getData = getData;
 
+    // Gerenciamento de Categorias
+    this.addCategories = (nameCategory) => {
+        let data = getData();
+        if (!data.categories) data.categories = [];
 
-    // ######################## ADD CATEGORIES ##############################
-    this.addCategories = function (nameCategory) {
-        let data = this.getData()
+        // Limpa e normaliza o nome
+        const cleanedName = nameCategory.replace(/\s+/g, ' ').trim();
 
-        if (!data.categories) data.categories = []
-
-        // remover espaços extras e manter apenas um espaço entre palavras
-        let cleanedName = nameCategory.replace(/\s+/g, ' ').trim()
-
-        // Verificação: impedir categorias duplicadas após limpeza
-        let existsCategory = data.categories.some(category => category.name.toLowerCase() === cleanedName.toLowerCase())
+        // Verifica duplicatas
+        const existsCategory = data.categories.some(
+            category => category.name.toLowerCase() === cleanedName.toLowerCase()
+        );
 
         if (existsCategory) {
-            alert("A categoria já existe!")
-            return null // Retorna null se a categoria já existir
+            alert("A categoria já existe!");
+            return null;
         }
 
-        // Criando a nova categoria com nome limpo
+        // Cria nova categoria
         const newCategory = {
             id: Date.now(),
             name: cleanedName
-        }
+        };
 
-        data.categories.push(newCategory)
-        data.phrases[newCategory.id] = []
+        data.categories.push(newCategory);
+        data.phrases[newCategory.id] = [];
+        saveData(data);
 
-        localStorage.setItem(keyStorage, JSON.stringify(data))
+        return newCategory.id;
+    };
 
-        return newCategory.id
-    }
-    // ######################## ADD PHRASES ##############################
-    this.addPhrases = function (categoryId, phraseText) { //add phrases
-        let data = this.getData()
-        // add no futuro um log caso o resultado seja verdade
-        if (!data.phrases[categoryId]) return //verifica se n existe o category id
-        data.phrases[categoryId].push(phraseText)
-        localStorage.setItem(keyStorage, JSON.stringify(data))
-    }
-    // ######################## DELETE CATEGORIES ##############################
-    this.deleteCategories = function (categoryId) { //delete categories
-        let data = this.getData()
+    this.deleteCategories = (categoryId) => {
+        let data = getData();
+        data.categories = data.categories.filter(category => category.id !== categoryId);
+        delete data.phrases[categoryId];
+        saveData(data);
+    };
 
-        data.categories = data.categories.filter(category => category.id !== categoryId) // cria nova array sem o item escolhido para exclusão
+    // Gerenciamento de Frases
+    this.addPhrases = (categoryId, phraseText) => {
+        let data = getData();
+        if (!validateCategoryId(data, categoryId)) return false;
 
-        delete data.phrases[categoryId] //delete todas a phrases das categorias
-        localStorage.setItem(keyStorage, JSON.stringify(data))
-    }
+        data.phrases[categoryId].push(phraseText.trim());
+        saveData(data);
+        return true;
+    };
 
-    this.deletePhrases = function (categoryId, phraseIndex) { //delete phrases
-        let data = this.getData()
+    this.deletePhrases = (categoryId, phraseIndex) => {
+        let data = getData();
+        if (!validateCategoryId(data, categoryId)) return false;
 
-        if (!data.phrases[categoryId]) return //verifica se n existe o category id
+        data.phrases[categoryId].splice(phraseIndex, 1);
+        saveData(data);
+        return true;
+    };
 
-        data.phrases[categoryId].splice(phraseIndex, 1) //remove a frase pelo índice
+    this.editPhrase = (categoryId, phraseIndex, newText) => {
+        let data = getData();
+        if (!validateCategoryId(data, categoryId)) return false;
+        if (phraseIndex < 0 || phraseIndex >= data.phrases[categoryId].length) return false;
 
-        localStorage.setItem(keyStorage, JSON.stringify(data)) //atualiza dados
-    }
+        data.phrases[categoryId][phraseIndex] = newText.trim();
+        saveData(data);
+        return true;
+    };
 
-    this.deleteAllData = function () { //delete data total
-        localStorage.setItem(keyStorage, JSON.stringify({ categories: [], phrases: {} }))
-    }
-
-})
+    // Utilitários
+    this.deleteAllData = () => {
+        saveData(INITIAL_DATA);
+    };
+});

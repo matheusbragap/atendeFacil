@@ -33,6 +33,7 @@
   transform: translateY(-2px);
   color: rgba(0, 0, 0, 0.774);
 }
+
 .btn-back:focus {
   background-color: #e6738f;
   transform: translateY(-3px);

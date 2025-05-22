@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-        <meta name="color-scheme" content="light dark">
-        <title>Atende Fácil</title>
-        <link rel="icon" href="img/favicon.ico">
 
-        <!-- angular -->
-        <script src="dependencies/angular/angular.min.js"></script>
-        <script src="dependencies/angular/angular-route.js"></script>
-        <script src="dependencies/angular/angular-resource.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <title>Atende Fácil</title>
+    <link rel="icon" href="img/favicon.ico">
 
-        <!-- bootstrap css -->
-        <link rel="stylesheet" href="dependencies/bootstrap/bootstrap.min.css" /> <!-- css -->
-        <link rel="stylesheet" href="dependencies/bootstrap/icons.css" /> <!-- css -->
+    <!-- angular -->
+    <script src="dependencies/angular/angular.min.js"></script>
+    <script src="dependencies/angular/angular-route.js"></script>
+    <script src="dependencies/angular/angular-resource.js"></script>
 
-        <!-- ===================================================== css ===================================================== -->
-        <!-- global css -->
-        <link rel="stylesheet" href="css/index.css">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="dependencies/bootstrap/bootstrap.min.css" /> <!-- css -->
+    <link rel="stylesheet" href="dependencies/bootstrap/icons.css" /> <!-- css -->
 
-        <!-- pages -->
-        <link rel="stylesheet" href="css/pages/phrasesPage.css">
-        <link rel="stylesheet" href="css/pages/categoriesPage.css">
+    <!-- ===================================================== css ===================================================== -->
+    <!-- global css -->
+    <link rel="stylesheet" href="css/index.css">
 
-        <!-- components -->
-        <link rel="stylesheet" href="css/components/header.css">
-        <link rel="stylesheet" href="css/components/categoriesCards.css">
-        <link rel="stylesheet" href="css/components/phrasesCards.css">
-        <!-- ===================================================== css ===================================================== -->
-    </head>
-    <body ng-app="atendeFacil">
-        <div ng-view></div>
-        <!-- ===================================================== controller's ===================================================== -->
-        <!-- route -->
-        <script src="./js/app.js"></script>
-        <!-- pages -->
-        <script src="./js/controllers/pages/categoriesController.js"></script>
-        <script src="./js/controllers/pages/phrasesController.js"></script>
-        <!-- ===================================================== controller's ===================================================== -->
-        <script src="database/localDatabase.js"></script>
-        <!-- bootstrap js -->
-        <script src="dependencies/bootstrap/bootstrap.bundle.min.js"></script>
-    </body>
+    <!-- pages -->
+    <link rel="stylesheet" href="css/pages/phrasesPage.css">
+    <link rel="stylesheet" href="css/pages/categoriesPage.css">
+
+    <!-- components -->
+    <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/categoriesCards.css">
+    <link rel="stylesheet" href="css/components/phrasesCards.css">
+    <!-- ===================================================== css ===================================================== -->
+</head>
+
+<body ng-app="atendeFacil">
+    <div ng-view></div>
+
+    <!-- Global Components -->
+    <div ng-include="'components/confirmModal.html'"></div>
+
+    <!-- ===================================================== scripts ===================================================== -->
+    <!-- route -->
+    <script src="./js/app.js"></script>
+
+    <!-- services -->
+    <script src="./js/services/confirmModalService.js"></script>
+    <script src="database/localDatabase.js"></script>
+
+    <!-- pages -->
+    <script src="./js/controllers/pages/categoriesController.js"></script>
+    <script src="./js/controllers/pages/phrasesController.js"></script>
+
+    <!-- bootstrap js -->
+    <script src="dependencies/bootstrap/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>

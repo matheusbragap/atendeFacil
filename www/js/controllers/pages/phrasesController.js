@@ -1,132 +1,173 @@
-angular.module('atendeFacil').controller('phrasesController', ['$scope', '$routeParams', '$location', 'localDatabase', '$timeout', function ($scope, $routeParams, $location, localDatabase, $timeout) {
+angular.module('atendeFacil').controller('phrasesController', ['$scope', '$routeParams', '$location', 'localDatabase', '$timeout', 'confirmModalService',
+    function ($scope, $routeParams, $location, localDatabase, $timeout, confirmModalService) {
+        // Inicialização
+        const init = () => {
+            $scope.categoryId = parseInt($routeParams.categoryId);
+            $scope.data = localDatabase.getData();
+            $scope.categories = $scope.data.categories;
+            $scope.currentCategory = $scope.categories.find(object => object.id === $scope.categoryId);
+            updatePhrasesList();
+            confirmModalService.initialize();
+        };
 
-    // Inicializa os dados
-    $scope.categoryId = parseInt($routeParams.categoryId) // converte o id da url para número (ex: '/phrases/123' → 123)
-    $scope.data = localDatabase.getData() // pega todos os dados salvos no localstorage
-    $scope.categories = $scope.data.categories // armazena a lista de categorias
-    $scope.currentCategory = $scope.categories.find(object => object.id === $scope.categoryId) // encontra a categoria atual pelo id
-    $scope.phrases = $scope.data.phrases[$scope.categoryId] || [] // pega a lista de frases da categoria atual ou usa array vazio se não existir
+        // Atualiza a lista de frases
+        const updatePhrasesList = () => {
+            $scope.phrases = [...(localDatabase.getData().phrases[$scope.categoryId] || [])];
+        };
 
-
-    // ######################## ADD PHRASES ##############################
-    $scope.savePhrase = function (phraseText) {
-        localDatabase.addPhrases($scope.categoryId, phraseText)
-        $scope.phrases = [...(localDatabase.getData().phrases[$scope.categoryId] || [])]
-        let modal = bootstrap.Modal.getInstance(document.getElementById('modalPhrases')) // seta modal na variavel
-        modal.hide() // fecha modal
-        $scope.resetModal()
-    }
-
-
-
-    // ######################## DELETE PHRASES ##############################
-    $scope.deletePhrase = function (phrase) {
-        if (confirm('Você tem certeza que deseja apagar a frase?')) {
-            localDatabase.deletePhrases($scope.categoryId, phrase)
-            $scope.phrases = [...(localDatabase.getData().phrases[$scope.categoryId] || [])]
-        }
-    }
-    // ######################## COPY ##############################
-    // Variáveis para controle
-    var currentTooltip = null
-    var currentTimeout = null
-
-    $scope.copyPhrase = function (phrase, $event) {
-        // Copia o texto
-        navigator.clipboard.writeText(phrase)
-
-        // Remove notificação anterior
-        if (currentTooltip) {
-            currentTooltip.remove()
-            $timeout.cancel(currentTimeout)
-        }
-
-        // Determina se foi ativado por mouse ou teclado
-        const isKeyboardEvent = !$event.clientX || !$event.clientY
-
-        // Cria a nova notificação
-        currentTooltip = angular.element('<div class="copied-tooltip">Copiado!</div>')
-
-        // Adiciona classe de posicionamento adequado
-        currentTooltip.addClass(isKeyboardEvent ? 'keyboard-position' : 'mouse-position')
-
-        // Posiciona de acordo com o tipo de evento
-        if (isKeyboardEvent) {
-            // Centralizado na parte inferior
-            currentTooltip.css({
-                bottom: '30px',
-                left: '50%',
-                transform: 'translateX(-50%)'
-            });
-        } else {
-            // Ao lado do cursor do mouse
-            currentTooltip.css({
-                left: $event.clientX + 'px',
-                top: $event.clientY + 'px'
-            });
-        }
-
-        // Adiciona ao body
-        angular.element(document.body).append(currentTooltip)
-
-        // Remove após 2 segundos
-        currentTimeout = $timeout(function () {
-            if (currentTooltip) {
-                currentTooltip.remove()
-                currentTooltip = null
+        // Gerenciamento de Modal
+        const closeModal = (modalId) => {
+            const modal = bootstrap.Modal.getInstance(document.getElementById(modalId));
+            if (modal) {
+                modal.hide();
+                // Remove o backdrop manualmente
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    backdrop.remove();
+                }
+                // Remove a classe modal-open do body
+                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
+                document.body.style.paddingRight = '';
             }
-        }, 2000)
-    }
-    // ######################## MODAL ##############################
-    $scope.confirmClearText = function () { //confirm clear text
-        if (confirm('Tem certeza que limpar o texto?')) {
-            $scope.resetModal()
-        }
-    }
-    $scope.resetModal = function () { //clear text
-        $scope.newPhraseText = ""
-    }
-    //######################## go to main menu ##############################
-    $scope.goBack = function () {
-        $location.path('/')
-    }
-    // // teste para ler mais ###########################################
-    // $scope.expandedCards = {};
+        };
 
-    // // Verifica se o texto precisa do "ler mais"
-    // $scope.shouldCollapse = function (text) {
-    //     const lineCount = (text.match(/\n/g) || []).length + 1;
-    //     return lineCount > 10 || text.length > 500;
-    // };
+        // Função específica para fechar o modal de edição
+        $scope.closeEditModal = () => {
+            closeModal('editPhraseModal');
+            // Limpa os campos do formulário
+            $scope.editPhraseText = "";
+            $scope.editingIndex = undefined;
+        };
 
-    // // Alterna entre expandido/recolhido
-    // $scope.toggleExpand = function (index, event) {
-    //     $scope.expandedCards[index] = !$scope.expandedCards[index];
-    //     event.stopPropagation(); // Evita que o clique propague para outros elementos
-    // };
+        // ######################## PHRASES MANAGEMENT ##############################
+        $scope.savePhrase = (phraseText) => {
+            if (!phraseText?.trim()) return;
 
-    // // Função para editar frase (você precisará implementar a lógica completa)
-    // $scope.editPhrase = function (index, event) {
-    //     // Exemplo básico - você deve adaptar para sua implementação
-    //     const phraseToEdit = $scope.phrases[index];
-    //     $scope.newPhraseText = phraseToEdit;
-    //     $('#modalPhrases').modal('show');
-    //     $scope.editingIndex = index;
-    //     event.stopPropagation();
-    // };
+            localDatabase.addPhrases($scope.categoryId, phraseText);
+            updatePhrasesList();
+            closeModal('modalPhrases');
+            $scope.resetModal();
+        };
 
-    // //
-    // $scope.savePhrase = function (text) {
-    //     if ($scope.editingIndex !== undefined) {
-    //         // Edição de frase existente
-    //         $scope.phrases[$scope.editingIndex] = text;
-    //         $scope.editingIndex = undefined;
-    //     } else {
-    //         // Adição de nova frase
-    //         $scope.phrases.push(text);
-    //     }
-    //     $scope.newPhraseText = '';
-    //     $('#modalPhrases').modal('hide');
-    // };
+        $scope.deletePhrase = async (phrase, index) => {
+            const confirmed = await confirmModalService.show({
+                title: 'Excluir Frase',
+                message: 'Você tem certeza que deseja apagar esta frase?',
+                confirmText: 'Excluir',
+                cancelText: 'Cancelar'
+            });
 
-}])
+            if (confirmed) {
+                localDatabase.deletePhrases($scope.categoryId, index);
+                updatePhrasesList();
+                $scope.$apply();
+            }
+        };
+
+        // ######################## EDIT PHRASES ##############################
+        $scope.startEditing = (phrase, index) => {
+            $scope.editPhraseText = phrase;
+            $scope.editingIndex = index;
+            $timeout(() => {
+                const modal = new bootstrap.Modal(document.getElementById('editPhraseModal'));
+                modal.show();
+            });
+        };
+
+        $scope.confirmEditPhrase = () => {
+            if ($scope.editingIndex === undefined) {
+                alert("Nenhuma frase selecionada para edição");
+                return;
+            }
+
+            if (!$scope.editPhraseText?.trim()) {
+                alert("O texto não pode estar vazio");
+                return;
+            }
+
+            const success = localDatabase.editPhrase(
+                $scope.categoryId,
+                $scope.editingIndex,
+                $scope.editPhraseText
+            );
+
+            if (success) {
+                updatePhrasesList();
+                closeModal('editPhraseModal');
+                $scope.editPhraseText = "";
+                $scope.editingIndex = undefined;
+            } else {
+                alert("Falha ao atualizar a frase");
+            }
+        };
+
+        // ######################## COPY FUNCTIONALITY ##############################
+        let currentTooltip = null;
+        let currentTimeout = null;
+
+        $scope.copyPhrase = (phrase, $event) => {
+            navigator.clipboard.writeText(phrase);
+
+            if (currentTooltip) {
+                currentTooltip.remove();
+                $timeout.cancel(currentTimeout);
+            }
+
+            const isKeyboardEvent = !$event.clientX && !$event.clientY;
+            currentTooltip = angular.element('<div class="copied-tooltip">Copiado!</div>');
+            currentTooltip.addClass(isKeyboardEvent ? 'keyboard-position' : 'mouse-position');
+
+            const tooltipPosition = isKeyboardEvent
+                ? { bottom: '30px', left: '50%', transform: 'translateX(-50%)' }
+                : { left: $event.clientX + 'px', top: $event.clientY + 'px' };
+
+            currentTooltip.css(tooltipPosition);
+            angular.element(document.body).append(currentTooltip);
+
+            currentTimeout = $timeout(() => {
+                if (currentTooltip) {
+                    currentTooltip.remove();
+                    currentTooltip = null;
+                }
+            }, 2000);
+        };
+
+        // ######################## MODAL MANAGEMENT ##############################
+        $scope.clearText = async () => {
+            const confirmed = await confirmModalService.show({
+                title: 'Limpar Texto',
+                message: 'Tem certeza que deseja limpar o texto?',
+                confirmText: 'Limpar',
+                cancelText: 'Cancelar'
+            });
+
+            if (confirmed) {
+                // Limpa tanto o texto do modal de nova frase quanto o de edição
+                $scope.newPhraseText = "";
+                $scope.editPhraseText = "";
+                $scope.$apply();
+            }
+        };
+
+        $scope.resetModal = () => {
+            $scope.newPhraseText = "";
+        };
+
+        // ######################## NAVIGATION ##############################
+        $scope.goBack = () => {
+            $location.path('/');
+        };
+
+        $scope.getRowBasedNumber = function (index) {
+            // Calcula a linha (começando do 0)
+            const row = Math.floor(index / 2);
+            // Calcula a posição na linha (0 ou 1)
+            const colPosition = index % 2;
+            // Calcula o número final
+            return (row * 2) + colPosition + 1;
+        };
+
+        // Inicializa o controlador
+        init();
+    }])
