@@ -1,5 +1,4 @@
-/* ====================== navbar personalizada ====================== */
-
+/* ============================================== */
 .navbar-custom {
   border-bottom: 2.5px solid #ff85a2;
   min-height: 60px;
@@ -7,8 +6,7 @@
   padding-bottom: 0.25rem;
 }
 
-/* ====================== cores personalizadas ====================== */
-
+/* ============================================== */
 .text-pink {
   color: #ff85a2 !important;
 }
@@ -17,42 +15,95 @@
   background-color: #ff85a2 !important;
 }
 
-/* ====================== efeitos de hover ====================== */
-/* efeito ao passar o mouse nos links do sidebar */
+.border-pink {
+  border-color: #ff85a2 !important;
+}
+
+/* ============================================== */
+.sidebar-link {
+  transition: all 0.3s ease;
+}
+
 .sidebar-link:hover {
   background-color: rgba(255, 133, 162, 0.1);
   color: #ff85a2 !important;
 }
 
-/* ====================== botão hambúrguer ====================== */
-.hamburger-btn {
-    transition: all 0.3s ease;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.sidebar-link:focus-visible {
+  background-color: rgba(255, 133, 162, 0.15);
+  outline: 2px solid #ff85a2;
+  outline-offset: -2px;
 }
 
+.sidebar-link:active {
+  background-color: rgba(255, 133, 162, 0.2);
+}
+
+/* ============================================== */
+.hamburger-btn {
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: none !important;
+}
 
 .hamburger-btn:hover {
-    background-color: rgba(255, 133, 162, 0.1);
-    transform: scale(1.1);
+  background-color: rgba(255, 133, 162, 0.1);
+  transform: scale(1.1);
+  box-shadow: none !important;
+}
+
+.hamburger-btn:focus {
+  background-color: rgba(255, 133, 162, 0.1);
+  transform: scale(1.1);
+  box-shadow: none !important;
+}
+
+.hamburger-btn:focus-visible {
+  background-color: rgba(255, 133, 162, 0.1);
+  transform: scale(1.1);
+  box-shadow: none !important;
 }
 
 .hamburger-btn:active {
-    background-color: rgba(255, 133, 162, 0.2);
-    transform: scale(0.95);
+  background-color: rgba(255, 133, 162, 0.2);
+  transform: scale(0.95);
+  box-shadow: none !important;
 }
 
-
-
-/* .offcanvas.show {
-    visibility: visible;
+/* ============================================== */
+.btn-close {
+  box-shadow: none !important;
 }
 
-/* pode precisar */
-/* .border-pink {
-    border-color: #ff85a2 !important;
-} */
+.btn-close:focus-visible {
+  box-shadow: none !important;
+}
+
+.btn-close:active {
+  box-shadow: none !important;
+}
+
+/* ============================================== */
+.offcanvas-sidebar {
+  border-right: 1px solid rgba(255, 133, 162, 0.3);
+}
+
+/* ============================================== */
+.navbar-brand:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid #ff85a2;
+  outline-offset: 2px;
+  border-radius: 4px;
+  box-shadow: none !important;
+}
+
+/* ============================================== */
+:focus:not(:focus-visible) {
+  outline: none;
+}

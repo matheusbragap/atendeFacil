@@ -13,8 +13,8 @@ if (!fs.existsSync(ELECTRON_MAIN_PATH)) {
 // Conteúdo inejeta
 const MENU_REMOVAL_CODE = `
 // ===== MENU REMOVAL INJECTION =====
-mainWindow.removeMenu(); // Método mais moderno e garantido
-mainWindow.setMenu(null); // Redundância para garantir
+mainWindow.removeMenu();
+mainWindow.setMenu(null);
 // =================================
 `;
 

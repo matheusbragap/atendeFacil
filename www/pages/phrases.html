@@ -47,12 +47,13 @@
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Editar frase">
                             <i class="bi bi-pencil"></i>
                         </button>
-                        <button class="btn-action btn-copy" ng-click="copyPhrase(phrase, $index)"
+                        <button class="btn-action btn-copy" ng-click="copyPhrase(phrase, $event)"
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Copiar frase">
                             <i class="bi bi-clipboard"></i>
                         </button>
-                        <button class="btn-action btn-delete" ng-click="deletePhrase($index)" data-bs-toggle="tooltip"
-                            data-bs-placement="top" title="Excluir frase">
+                        <button class="btn-action btn-delete"
+                            ng-click="deletePhrase(phrase, $index)" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Excluir frase">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>

@@ -25,13 +25,14 @@
   align-items: center;
   gap: 8px;
   transition: all 0.3s ease;
+  border: 1px solid #ff85a2 !important;
 }
 
 .btn-back:hover {
-  background-color: #e6738f;
+  background-color: #ff85a2;
   transform: translateY(-2px);
+  color: rgba(0, 0, 0, 0.774);
 }
-
 .btn-back:focus {
   background-color: #e6738f;
   transform: translateY(-3px);
@@ -43,6 +44,7 @@
   background-color: white !important;
   color: #ff85a2 !important;
   border: 1px solid #ff85a2 !important;
+  transform: translateY(-2px);
 }
 
 /* ====================== TÍTULO DA CATEGORIA ====================== */
@@ -238,120 +240,120 @@
 
 /* ====================== ESTADO COM FRASES ====================== */
 .phrases-list {
-    padding-bottom: 80px;
+  padding-bottom: 80px;
 }
 
 .phrase-card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    border: 1px solid rgba(255, 133, 162, 0.2);
-    min-height: 120px; /* Altura mínima para cards muito curtos */
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid rgba(255, 133, 162, 0.2);
+  min-height: 120px;
 }
 
 .phrase-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(255, 133, 162, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(255, 133, 162, 0.15);
 }
 
 .phrase-number {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 0.9rem;
-    color: #ff85a2;
-    font-weight: bold;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 0.9rem;
+  color: #ff85a2;
+  font-weight: bold;
 }
 
 .phrase-text {
-    margin: 0;
-    padding: 10px 0 10px 20px;
-    color: #333;
-    font-size: 1rem;
-    line-height: 1.5;
-    word-break: break-word;
-    white-space: pre-line;
+  margin: 0;
+  padding: 10px 0 10px 20px;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.5;
+  word-break: break-word;
+  white-space: pre-line;
 }
 
 /* Estilo para texto recolhido */
 .text-collapsed {
-    display: -webkit-box;
-    -webkit-line-clamp: 10; /* Limite de 10 linhas */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Estilo para "ler mais" */
 .read-more {
-    color: #ff85a2;
-    font-weight: 500;
-    cursor: pointer;
-    display: inline;
-    background: white;
-    padding-left: 4px;
+  color: #ff85a2;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline;
+  background: white;
+  padding-left: 4px;
 }
 
 .read-more:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .phrase-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 15px;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    padding-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding-top: 15px;
 }
 
 .btn-action {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background: transparent;
-    transition: all 0.2s ease;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  transition: all 0.2s ease;
 }
 
 .btn-edit {
-    color: #6c757d;
+  color: #6c757d;
 }
 
 .btn-edit:hover {
-    background: rgba(108, 117, 125, 0.1);
-    color: #495057;
+  background: rgba(108, 117, 125, 0.1);
+  color: #495057;
 }
 
 .btn-copy {
-    color: #6c757d;
+  color: #6c757d;
 }
 
 .btn-copy:hover {
-    background: rgba(108, 117, 125, 0.1);
-    color: #495057;
+  background: rgba(108, 117, 125, 0.1);
+  color: #495057;
 }
 
 .btn-delete {
-    color: #dc3545;
+  color: #dc3545;
 }
 
 .btn-delete:hover {
-    background: rgba(220, 53, 69, 0.1);
+  background: rgba(220, 53, 69, 0.1);
 }
 
 .badge.bg-pink {
-    background-color: #ff85a2 !important;
-    color: white;
-    font-weight: 500;
-    padding: 5px 12px;
+  background-color: #ff85a2 !important;
+  color: white;
+  font-weight: 500;
+  padding: 5px 12px;
 }

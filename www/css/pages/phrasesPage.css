@@ -86,3 +86,85 @@
   background-color: #e6738f;
   transform: scale(1.1);
 }
+
+.copied-tooltip {
+  position: fixed;
+  background-color: #ff85a2;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  pointer-events: none;
+  animation: popInOut 0.8s ease-out forwards;
+  opacity: 0;
+  max-width: 200px;
+  text-align: center;
+  transform-origin: center;
+}
+
+/* Posição para mouse */
+.copied-tooltip.mouse-position {
+  left: var(--mouse-x);
+  top: var(--mouse-y);
+  transform: translate(10px, -50%) scale(1.3);
+}
+
+/* Posição para teclado */
+.copied-tooltip.keyboard-position {
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) scale(1.3);
+}
+
+/* Animação rápida com efeito "pop" */
+@keyframes popInOut {
+  0% {
+    opacity: 0;
+    transform: translate(10px, -50%) scale(1.5);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translate(10px, -50%) scale(1);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translate(10px, -50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(10px, -60%) scale(0.9);
+  }
+}
+
+/* Animação para posição de teclado */
+.copied-tooltip.keyboard-position {
+  animation: popInOutKeyboard 0.8s ease-out forwards;
+}
+
+@keyframes popInOutKeyboard {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(1.5);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.9);
+  }
+}

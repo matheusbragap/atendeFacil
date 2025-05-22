@@ -1,4 +1,4 @@
-angular.module('atendeFacil').controller('phrasesController', ['$scope', '$routeParams', '$location', 'localDatabase', function ($scope, $routeParams, $location, localDatabase) {
+angular.module('atendeFacil').controller('phrasesController', ['$scope', '$routeParams', '$location', 'localDatabase', '$timeout', function ($scope, $routeParams, $location, localDatabase, $timeout) {
 
     // Inicializa os dados
     $scope.categoryId = parseInt($routeParams.categoryId) // converte o id da url para número (ex: '/phrases/123' → 123)
@@ -11,37 +11,85 @@ angular.module('atendeFacil').controller('phrasesController', ['$scope', '$route
     // ######################## ADD PHRASES ##############################
     $scope.savePhrase = function (phraseText) {
         localDatabase.addPhrases($scope.categoryId, phraseText)
-        $scope.phrases = [...(localDatabase.getData().phrases[$scope.categoryId] || [])];
+        $scope.phrases = [...(localDatabase.getData().phrases[$scope.categoryId] || [])]
         let modal = bootstrap.Modal.getInstance(document.getElementById('modalPhrases')) // seta modal na variavel
         modal.hide() // fecha modal
         $scope.resetModal()
     }
 
 
-    $scope.confirmClearText = function () {
+
+    // ######################## DELETE PHRASES ##############################
+    $scope.deletePhrase = function (phrase) {
+        if (confirm('Você tem certeza que deseja apagar a frase?')) {
+            localDatabase.deletePhrases($scope.categoryId, phrase)
+            $scope.phrases = [...(localDatabase.getData().phrases[$scope.categoryId] || [])]
+        }
+    }
+    // ######################## COPY ##############################
+    // Variáveis para controle
+    var currentTooltip = null
+    var currentTimeout = null
+
+    $scope.copyPhrase = function (phrase, $event) {
+        // Copia o texto
+        navigator.clipboard.writeText(phrase)
+
+        // Remove notificação anterior
+        if (currentTooltip) {
+            currentTooltip.remove()
+            $timeout.cancel(currentTimeout)
+        }
+
+        // Determina se foi ativado por mouse ou teclado
+        const isKeyboardEvent = !$event.clientX || !$event.clientY
+
+        // Cria a nova notificação
+        currentTooltip = angular.element('<div class="copied-tooltip">Copiado!</div>')
+
+        // Adiciona classe de posicionamento adequado
+        currentTooltip.addClass(isKeyboardEvent ? 'keyboard-position' : 'mouse-position')
+
+        // Posiciona de acordo com o tipo de evento
+        if (isKeyboardEvent) {
+            // Centralizado na parte inferior
+            currentTooltip.css({
+                bottom: '30px',
+                left: '50%',
+                transform: 'translateX(-50%)'
+            });
+        } else {
+            // Ao lado do cursor do mouse
+            currentTooltip.css({
+                left: $event.clientX + 'px',
+                top: $event.clientY + 'px'
+            });
+        }
+
+        // Adiciona ao body
+        angular.element(document.body).append(currentTooltip)
+
+        // Remove após 2 segundos
+        currentTimeout = $timeout(function () {
+            if (currentTooltip) {
+                currentTooltip.remove()
+                currentTooltip = null
+            }
+        }, 2000)
+    }
+    // ######################## MODAL ##############################
+    $scope.confirmClearText = function () { //confirm clear text
         if (confirm('Tem certeza que limpar o texto?')) {
             $scope.resetModal()
         }
     }
-    $scope.resetModal = function () {
+    $scope.resetModal = function () { //clear text
         $scope.newPhraseText = ""
     }
-
-
-
     //######################## go to main menu ##############################
     $scope.goBack = function () {
         $location.path('/')
     }
-
-
-
-
-
-
-
-
-
     // // teste para ler mais ###########################################
     // $scope.expandedCards = {};
 
@@ -67,7 +115,7 @@ angular.module('atendeFacil').controller('phrasesController', ['$scope', '$route
     //     event.stopPropagation();
     // };
 
-    // // Modifique sua função savePhrase para lidar com edição
+    // //
     // $scope.savePhrase = function (text) {
     //     if ($scope.editingIndex !== undefined) {
     //         // Edição de frase existente
