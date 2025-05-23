@@ -30,7 +30,7 @@
 .btn-add-category:focus,
 .btn-add-category:hover {
   background-color: #e6738f;
-  transform: translateY(-3px);
+  transform: scale(1.04);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   outline: none;
 }

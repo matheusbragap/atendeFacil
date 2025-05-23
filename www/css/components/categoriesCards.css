@@ -125,6 +125,8 @@
   flex-direction: column;
   min-height: 60vh;
   text-align: center;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .empty-state {
@@ -132,6 +134,8 @@
   width: 100%;
   position: relative;
   transform: none;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .empty-icon-container {
@@ -178,7 +182,7 @@
 
 .empty-action {
   opacity: 0;
-  
+
 }
 
 .animate-in .empty-action {
@@ -196,12 +200,13 @@
   align-items: center;
   gap: 8px;
   box-shadow: 0 4px 12px rgba(255, 133, 162, 0.3);
-  transition: all 0.3s ease;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
 .empty-btn:hover {
   background-color: #e6738f;
   box-shadow: 0 6px 16px rgba(255, 133, 162, 0.4);
+  transform: scale(1.04);
 }
 
 .empty-btn i {
@@ -235,4 +240,56 @@
   50% {
     transform: translateY(-15px);
   }
+}
+
+/* ====================== BOTÃO PRIMEIRA CATEGORIA ====================== */
+.btn-first-category {
+  background-color: #ff85a2;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  color: white;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(255, 133, 162, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  isolation: isolate;
+}
+
+.btn-first-category::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.btn-first-category:hover {
+  background-color: #e6738f;
+  box-shadow: 0 6px 16px rgba(255, 133, 162, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-first-category:hover::before {
+  opacity: 1;
+}
+
+.btn-first-category:active {
+  background-color: #d45d78;
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 133, 162, 0.3);
+}
+
+.btn-first-category i {
+  transition: transform 0.3s ease;
+}
+
+.btn-first-category:hover i {
+  transform: rotate(90deg);
 }

@@ -164,7 +164,7 @@ angular.module('atendeFacil').controller('phrasesController', ['$scope', '$route
             const row = Math.floor(index / 2);
             // Calcula a posição na linha (0 ou 1)
             const colPosition = index % 2;
-            // Calcula o número final
+            // Calcula o número final (linha * 2 + posição + 1)
             return (row * 2) + colPosition + 1;
         };
 

@@ -28,6 +28,7 @@
   columns: 2;
   column-gap: 1.5rem;
   position: relative;
+  column-fill: balance;
 }
 
 .phrase-item {
@@ -39,6 +40,30 @@
   will-change: transform;
   opacity: 0;
   animation: fadeIn 0.3s ease forwards;
+}
+
+/* Força o primeiro card para a primeira coluna */
+.phrase-item:first-child {
+  column-span: none;
+  break-after: column;
+  height: 100%;
+}
+
+/* Força o segundo card para a segunda coluna */
+.phrase-item:nth-child(2) {
+  column-span: none;
+  break-before: column;
+  height: 100%;
+}
+
+/* Quando houver apenas dois cards, força a distribuição */
+.phrases-grid:has(.phrase-item:nth-child(2):last-child) {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.phrases-grid:has(.phrase-item:nth-child(2):last-child) .phrase-item {
+  display: block;
 }
 
 .phrase-card {
@@ -286,6 +311,16 @@
 @media (max-width: 767px) {
   .phrases-grid {
     columns: 1;
+  }
+
+  .phrases-grid:has(.phrase-item:nth-child(2):last-child) {
+    grid-template-columns: 1fr;
+  }
+
+  .phrase-item:first-child,
+  .phrase-item:nth-child(2) {
+    break-after: auto;
+    break-before: auto;
   }
 }
 

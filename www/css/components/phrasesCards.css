@@ -30,13 +30,13 @@
 
 .btn-back:hover {
   background-color: #ff85a2;
-  transform: translateY(-2px);
+  transform: scale(1.04);
   color: rgba(0, 0, 0, 0.774);
 }
 
 .btn-back:focus {
   background-color: #e6738f;
-  transform: translateY(-3px);
+  transform: scale(1.04);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   outline: none;
 }
@@ -45,7 +45,7 @@
   background-color: white !important;
   color: #ff85a2 !important;
   border: 1px solid #ff85a2 !important;
-  transform: translateY(-2px);
+  transform: scale(0.98);
 }
 
 /* ====================== TÍTULO DA CATEGORIA ====================== */
@@ -133,7 +133,7 @@
 
 .btn-add:hover {
   background-color: #e6738f;
-  transform: translateY(-2px);
+  transform: scale(1.04);
   box-shadow: 0 4px 8px rgba(255, 133, 162, 0.3);
 }
 
@@ -357,4 +357,56 @@
   color: white;
   font-weight: 500;
   padding: 5px 12px;
+}
+
+/* ====================== BOTÃO PRIMEIRA FRASE ====================== */
+.btn-first-phrase {
+  background-color: #ff85a2;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  color: white;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(255, 133, 162, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  isolation: isolate;
+}
+
+.btn-first-phrase::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.btn-first-phrase:hover {
+  background-color: #e6738f;
+  box-shadow: 0 6px 16px rgba(255, 133, 162, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-first-phrase:hover::before {
+  opacity: 1;
+}
+
+.btn-first-phrase:active {
+  background-color: #d45d78;
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 133, 162, 0.3);
+}
+
+.btn-first-phrase i {
+  transition: transform 0.3s ease;
+}
+
+.btn-first-phrase:hover i {
+  transform: rotate(90deg);
 }
