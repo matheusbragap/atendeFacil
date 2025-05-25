@@ -1,0 +1,35 @@
+<header></header>
+<div class="config-page d-flex" style="min-height: 100vh;">
+    <!-- Sidebar fixa -->
+    <aside class="config-sidebar bg-white border-end shadow-sm d-flex flex-column p-0"
+        style="width: 260px; min-height: 100vh; position: sticky; top: 0;">
+        <div class="sidebar-header p-4 border-bottom">
+            <h5 class="mb-0 text-pink"><i class="bi bi-gear me-2"></i>Configurações</h5>
+        </div>
+        <ul class="nav flex-column py-3">
+            <li class="nav-item mb-2">
+                <a class="nav-link" ng-class="{active: $root.section('/settings/general')}"
+                    ng-click="$root.goToPath('/settings/general')">
+                    <i class="bi bi-sliders me-2"></i>Geral
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link" ng-class="{active: $root.section('/settings/theme')}"
+                    ng-click="$root.goToPath('/settings/theme')">
+                    <i class="bi bi-palette me-2"></i>Tema
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link" ng-class="{active: $root.section('/settings/about')}"
+                    ng-click="$root.goToPath('/settings/about')">
+                    <i class="bi bi-info-circle me-2"></i>Sobre
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Conteúdo -->
+    <main class="flex-grow-1 p-4">
+        <div ng-include="getSettingsSectionUrl()"></div>
+    </main>
+</div>

@@ -42,35 +42,35 @@ angular.module('atendeFacil').service('confirmModalService', ['$rootScope', func
                 confirmText: options.confirmText || 'Confirmar',
                 cancelText: options.cancelText || 'Cancelar',
                 onConfirm: () => {
-                    this.hide();
-                    resolve(true);
+                    this.hide()
+                    resolve(true)
                 }
             };
 
             // Cria o backdrop antes de mostrar o modal
-            createBackdrop();
+            createBackdrop()
 
             // Inicializa e mostra o modal
-            const modalElement = document.getElementById('confirmModal');
+            const modalElement = document.getElementById('confirmModal')
             modalInstance = new bootstrap.Modal(modalElement, {
                 backdrop: false // Desabilita o backdrop padrão do Bootstrap
-            });
+            })
 
             // Listener para quando o modal for fechado
             modalElement.addEventListener('hidden.bs.modal', () => {
-                removeBackdrop();
-                resolve(false);
-            }, { once: true });
+                removeBackdrop()
+                resolve(false)
+            }, { once: true })
 
-            modalInstance.show();
+            modalInstance.show()
         });
     };
 
     this.hide = () => {
         if (modalInstance) {
-            modalInstance.hide();
-            removeBackdrop();
-            modalInstance = null;
+            modalInstance.hide()
+            removeBackdrop()
+            modalInstance = null
         }
-    };
-}]); 
+    }
+}])

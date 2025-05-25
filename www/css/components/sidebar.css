@@ -1,0 +1,81 @@
+/* Overlay para o sidebar */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 1040;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Quando o sidebar estiver aberto */
+.offcanvas.show+.sidebar-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Estilo personalizado para os botões do sidebar */
+.sidebar-btn {
+  border: 2px solid var(--bs-pink);
+  border-radius: 10px;
+  padding: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: white;
+  color: var(--bs-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.sidebar-btn:hover {
+  background: var(--bs-pink);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+}
+
+.sidebar-btn i {
+  font-size: 1.2rem;
+}
+
+.sidebar-btn-container {
+  padding: 16px;
+  background: rgba(220, 53, 69, 0.05);
+  border-top: 1px solid rgba(220, 53, 69, 0.1);
+}
+
+
+.offcanvas-body {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+
+.sidebar-btn-container {
+  padding: 16px;
+  background: rgba(220, 53, 69, 0.05);
+  border-top: 1px solid rgba(220, 53, 69, 0.1);
+  margin-top: auto !important;
+  /* Isso força o container para baixo */
+  width: 100%;
+}
+
+
+.nav.flex-column {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.btn.disabled,
+.btn:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}

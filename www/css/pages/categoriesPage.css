@@ -111,3 +111,48 @@
   background-color: #ccc;
   border-color: #ccc;
 }
+
+/* Sidebar fixa para página de configurações */
+.config-sidebar {
+  min-height: 100vh;
+  width: 260px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: #fff;
+  border-right: 1px solid #f3c2d3;
+  z-index: 10;
+}
+
+.config-sidebar .sidebar-header {
+  background: #fff;
+  border-bottom: 1px solid #f3c2d3;
+}
+
+.config-sidebar .nav-link {
+  color: #d63384;
+  font-weight: 500;
+  border-radius: 8px;
+  margin: 0 12px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.config-sidebar .nav-link.active,
+.config-sidebar .nav-link:hover {
+  background: #ffe6ec;
+  color: #a61e4d;
+}
+
+@media (max-width: 991px) {
+  .config-sidebar {
+    display: none;
+  }
+}
+
+.config-page main {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.04);
+  margin: 32px 0 32px 32px;
+  min-height: 80vh;
+}

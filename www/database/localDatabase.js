@@ -74,26 +74,26 @@ angular.module('atendeFacil').service('localDatabase', function () {
     };
 
     this.deletePhrases = (categoryId, phraseIndex) => {
-        let data = getData();
-        if (!validateCategoryId(data, categoryId)) return false;
+        let data = getData()
+        if (!validateCategoryId(data, categoryId)) return false
 
-        data.phrases[categoryId].splice(phraseIndex, 1);
-        saveData(data);
-        return true;
+        data.phrases[categoryId].splice(phraseIndex, 1)
+        saveData(data)
+        return true
     };
 
     this.editPhrase = (categoryId, phraseIndex, newText) => {
-        let data = getData();
-        if (!validateCategoryId(data, categoryId)) return false;
-        if (phraseIndex < 0 || phraseIndex >= data.phrases[categoryId].length) return false;
+        let data = getData()
+        if (!validateCategoryId(data, categoryId)) return false
+        if (phraseIndex < 0 || phraseIndex >= data.phrases[categoryId].length) return false
 
-        data.phrases[categoryId][phraseIndex] = newText.trim();
-        saveData(data);
-        return true;
+        data.phrases[categoryId][phraseIndex] = newText.trim()
+        saveData(data)
+        return true
     };
 
-    // Utilitários
+    
     this.deleteAllData = () => {
-        saveData(INITIAL_DATA);
-    };
-});
+        saveData(INITIAL_DATA)
+    }
+})

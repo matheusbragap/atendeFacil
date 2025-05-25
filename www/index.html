@@ -8,49 +8,55 @@
     <title>Atende Fácil</title>
     <link rel="icon" href="img/favicon.ico">
 
-    <!-- angular -->
+    <!-- ======================= AngularJS ======================= -->
     <script src="dependencies/angular/angular.min.js"></script>
     <script src="dependencies/angular/angular-route.js"></script>
     <script src="dependencies/angular/angular-resource.js"></script>
 
-    <!-- bootstrap css -->
-    <link rel="stylesheet" href="dependencies/bootstrap/bootstrap.min.css" /> <!-- css -->
-    <link rel="stylesheet" href="dependencies/bootstrap/icons.css" /> <!-- css -->
+    <!-- ======================= Bootstrap CSS ======================= -->
+    <link rel="stylesheet" href="dependencies/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="dependencies/bootstrap/icons.css" />
 
-    <!-- ===================================================== css ===================================================== -->
-    <!-- global css -->
+    <!-- ======================= CSS Global ======================= -->
     <link rel="stylesheet" href="css/index.css">
 
-    <!-- pages -->
+    <!-- ======================= CSS de Páginas ======================= -->
     <link rel="stylesheet" href="css/pages/phrasesPage.css">
     <link rel="stylesheet" href="css/pages/categoriesPage.css">
 
-    <!-- components -->
+    <!-- ======================= CSS de Componentes ======================= -->
     <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/sidebar.css">
     <link rel="stylesheet" href="css/components/categoriesCards.css">
     <link rel="stylesheet" href="css/components/phrasesCards.css">
-    <!-- ===================================================== css ===================================================== -->
 </head>
 
 <body ng-app="atendeFacil">
     <div ng-view></div>
 
-    <!-- Global Components -->
+    <!-- Componentes Globais -->
     <div ng-include="'components/confirmModal.html'"></div>
 
-    <!-- ===================================================== scripts ===================================================== -->
-    <!-- route -->
-    <script src="./js/app.js"></script>
+    <!-- ======================= SCRIPTS ======================= -->
 
-    <!-- services -->
-    <script src="./js/services/confirmModalService.js"></script>
+    <!-- App principal (criação do módulo e funções globais) -->
+    <script src="js/app.js"></script>
+    <!-- Rotas -->
+    <script src="js/routes.js"></script>
+
+    <!-- Serviços -->
+    <script src="js/services/confirmModalService.js"></script>
     <script src="database/localDatabase.js"></script>
 
-    <!-- pages -->
-    <script src="./js/controllers/pages/categoriesController.js"></script>
-    <script src="./js/controllers/pages/phrasesController.js"></script>
+    <!-- Controllers -->
+    <script src="js/controllers/pages/categoriesController.js"></script>
+    <script src="js/controllers/pages/phrasesController.js"></script>
+    <script src="js/controllers/pages/settingsController.js"></script>
 
-    <!-- bootstrap js -->
+    <!-- Componentes -->
+    <script src="js/components/header.js"></script>
+
+    <!-- Bootstrap JS -->
     <script src="dependencies/bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 

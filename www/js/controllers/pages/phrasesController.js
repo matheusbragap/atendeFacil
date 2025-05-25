@@ -77,12 +77,10 @@ angular.module('atendeFacil').controller('phrasesController', ['$scope', '$route
 
         $scope.confirmEditPhrase = () => {
             if ($scope.editingIndex === undefined) {
-                alert("Nenhuma frase selecionada para edição");
                 return;
             }
 
             if (!$scope.editPhraseText?.trim()) {
-                alert("O texto não pode estar vazio");
                 return;
             }
 
@@ -97,8 +95,6 @@ angular.module('atendeFacil').controller('phrasesController', ['$scope', '$route
                 closeModal('editPhraseModal');
                 $scope.editPhraseText = "";
                 $scope.editingIndex = undefined;
-            } else {
-                alert("Falha ao atualizar a frase");
             }
         };
 

@@ -1,5 +1,5 @@
-angular.module('atendeFacil').controller('categoriesController', ['$scope', 'localDatabase', '$location', 'confirmModalService',
-    function ($scope, localDatabase, $location, confirmModalService) {
+angular.module('atendeFacil').controller('categoriesController', ['$scope', 'localDatabase', '$location', 'confirmModalService', '$rootScope',
+    function ($scope, localDatabase, $location, confirmModalService, $rootScope) {
         // Inicialização
         const init = () => {
             localDatabase.initialData(); // cria caso n exista o banco de dados
@@ -33,8 +33,8 @@ angular.module('atendeFacil').controller('categoriesController', ['$scope', 'loc
 
         //######################## NAVIGATION ############################################
         $scope.goToPhrases = (categoryId) => {
-            $location.path('/phrases/' + categoryId);
-        };
+            $rootScope.goToPath('/phrases/' + categoryId);
+        }
 
         //######################## CARDS CATEGORY ############################################
         $scope.removeCategory = async (categoryId, $event) => {
